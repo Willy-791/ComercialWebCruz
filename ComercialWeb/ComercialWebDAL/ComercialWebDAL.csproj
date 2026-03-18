@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ComercialWebEN\ComercialWebEN.csproj" />
+  </ItemGroup>
+
 </Project>
