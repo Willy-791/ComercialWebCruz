@@ -2,5 +2,5 @@
   <Project Path="ComercialWebBL/ComercialWebBL.csproj" Id="0d78d29b-4a51-4eef-88d3-6420dd5b9b71" />
   <Project Path="ComercialWebDAL/ComercialWebDAL.csproj" Id="098ed36a-cc16-4b38-acd9-5ee4a9d2b268" />
   <Project Path="ComercialWebEN/ComercialWebEN.csproj" Id="e604550c-a7e2-4544-be64-2fc3b1410872" />
-  <Project Path="ComercialWebTEST/ComercialWebTEST.csproj" Id="6875c8a7-1280-4394-b11b-35890b3f3cc2" />
+  <Project Path="ComercialWebMVC/ComercialWebMVC.csproj" Id="7f871b37-ae19-46de-bd3c-ad24e9481485" />
 </Solution>
