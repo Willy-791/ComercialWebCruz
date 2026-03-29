@@ -8,7 +8,8 @@ namespace ComercialWebDAL
 {
     public class RolDAL
     {
-        public static async Task<int> GuardarAsync(RolEN pRol){
+        public static async Task<int> GuardarAsync(RolEN pRol)
+        {
             int result = 0;
             try
             {
@@ -28,50 +29,72 @@ namespace ComercialWebDAL
         {
             int result = 0;
             try
-            { 
+            {
                 using (var dbContexto = new DBContexto())
                 {
-                    var rol= await dbContexto.Rol.FirstOrDefaultAsync(r => r.Id == pRol.Id);
+                    var rol = await dbContexto.Rol.FirstOrDefaultAsync(r => r.Id == pRol.Id);
                     rol.Nombre = pRol.Nombre;
                     dbContexto.Update(rol);
                     result = await dbContexto.SaveChangesAsync();
                 }
                 return result;
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 throw new Exception("Error al modificar el rol: " + ex.Message);
             }
         }
         public static async Task<int> EliminarAsync(RolEN pRol)
         {
             int result = 0;
-            using (var dbContexto = new DBContexto())
+            try
             {
-                var rol = await dbContexto.Rol.FirstOrDefaultAsync(x => x.Id == pRol.Id);
-                dbContexto.Rol.Remove(rol);
-                result = await dbContexto.SaveChangesAsync();
+                using (var dbContexto = new DBContexto())
+                {
+                    var rol = await dbContexto.Rol.FirstOrDefaultAsync(x => x.Id == pRol.Id);
+                    dbContexto.Rol.Remove(rol);
+                    result = await dbContexto.SaveChangesAsync();
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el rol: " + ex.Message);
+            }
         }
         public static async Task<RolEN> ObtenerPorIdAsync(RolEN pRol)
         {
             RolEN rol = new RolEN();
-            using (var dbContexto = new DBContexto())
+            try
             {
-                //Select Id, Nombre From Rol Where Id = 1; 
-                rol = await dbContexto.Rol.FirstOrDefaultAsync(s => s.Id == pRol.Id);
+                using (var dbContexto = new DBContexto())
+                {
+                    //Select Id, Nombre From Rol Where Id = 1; 
+                    rol = await dbContexto.Rol.FirstOrDefaultAsync(s => s.Id == pRol.Id);
+                }
+                return rol;
+
             }
-            return rol;
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el rol por id: " + ex.Message);
+            }
         }
         public static async Task<List<RolEN>> ObtenerTodosAsync()
         {
             List<RolEN> roles = new List<RolEN>();
-            using (var dbContexto = new DBContexto())
+            try
             {
-                roles = await dbContexto.Rol.ToListAsync();
+                using (var dbContexto = new DBContexto())
+                {
+                    roles = await dbContexto.Rol.ToListAsync();
+                }
+                return roles;
             }
-            return roles;
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener todos los roles: " + ex.Message);
+            }
         }
         internal static IQueryable<RolEN> QuerySelect(IQueryable<RolEN> pQuery, RolEN pRol)
         {
@@ -89,13 +112,21 @@ namespace ComercialWebDAL
         public static async Task<List<RolEN>> BuscarAsync(RolEN pRol)
         {
             var roles = new List<RolEN>();
-            using (var dbContexto = new DBContexto())
+            try
             {
-                var select = dbContexto.Rol.AsQueryable();
-                select = QuerySelect(select, pRol);
-                roles = await select.ToListAsync();
+                using (var dbContexto = new DBContexto())
+                {
+                    var select = dbContexto.Rol.AsQueryable();
+                    select = QuerySelect(select, pRol);
+                    roles = await select.ToListAsync();
+                }
+                return roles;
+
             }
-            return roles;
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar los roles: " + ex.Message);
+            }
         }
     }
 }

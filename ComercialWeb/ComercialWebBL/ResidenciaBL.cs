@@ -1,4 +1,5 @@
 ﻿using ComercialWebEN;
+using ComercialWebDAL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,9 +23,14 @@ namespace ComercialWebBL
             return await ResidenciaDAL.EliminarAsync(pResidencia);
         }
 
-        public async Task<ResidenciaEN> ObtenerTodosPorIdAsync(ResidenciaEN pResidencia)
+        public async Task<List<ResidenciaEN>> ObtenerTodosAsync()
         {
-            return await ResidenciaDAL.ObtenerTodosPorIdAsync(pResidencia);
+            return await ResidenciaDAL.ObtenerTodosAsync();
+        }
+
+        public async Task<ResidenciaEN> ObtenerPorIdAsync(ResidenciaEN pRol)
+        {
+            return await ResidenciaDAL.ObtenerPorIdAsync(pRol);
         }
 
         public async Task<List<ResidenciaEN>> BuscarAsync(ResidenciaEN pResidencia)

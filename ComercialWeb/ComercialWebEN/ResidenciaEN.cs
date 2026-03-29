@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace ComercialWebEN
@@ -19,5 +20,8 @@ namespace ComercialWebEN
 
         [Required(ErrorMessage ="El estado es obligatorio")]
         public bool Estado { get; set; }
+
+        [NotMapped]
+        public int Top_Aux { get; set; }
     }
 }
