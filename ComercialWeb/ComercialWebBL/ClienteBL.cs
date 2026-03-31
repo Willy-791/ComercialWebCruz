@@ -1,4 +1,5 @@
-﻿using ComercialWebEN;
+﻿using ComercialWebDAL;
+using ComercialWebEN;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,19 +24,24 @@ namespace ComercialWebBL
             return await ClienteDAL.EliminarAsync(pCliente);
         }
 
-        public async Task<ClienteEN> ObtenerTodosPorIdAsync(ClienteEN pCliente)
+        public async Task<ClienteEN> ObtenerPorIdAsync(ClienteEN pCliente)
         {
-            return await ClienteDAL.ObtenerTodosPorIdAsync(pCliente);
+            return await ClienteDAL.ObtenerPorIdAsync(pCliente);
         }
 
-        public async Task<List<ClienteEN>> BuscarNombreAsync(ClienteEN pCliente)
+        public async Task<List<ClienteEN>> ObtenerTodosAsync()
         {
-            return await ClienteDAL.BuscarNombreAsync(pCliente);
+            return await ClienteDAL.ObtenerTodosAsync();
         }
 
-        public async Task<List<ClienteEN>> BuscarDocumentoAsync(ClienteEN pCliente)
-        {
-            return await ClienteDAL.BuscarDocumentoAsync(pCliente);
-        }
+        //public async Task<List<ClienteEN>> BuscarNombreAsync(ClienteEN pCliente)
+        //{
+        //    return await ClienteDAL.BuscarNombreAsync(pCliente);
+        //}
+
+        //public async Task<List<ClienteEN>> BuscarDocumentoAsync(ClienteEN pCliente)
+        //{
+        //    return await ClienteDAL.BuscarDocumentoAsync(pCliente);
+        //}
     }
 }
