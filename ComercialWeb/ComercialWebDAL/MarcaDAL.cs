@@ -70,11 +70,15 @@ namespace ComercialWebDAL
         {
             if (pMarca.IdMarca > 0)
                 pQuery = pQuery.Where(s => s.IdMarca == pMarca.IdMarca);
+
             if (!string.IsNullOrWhiteSpace(pMarca.Nombre))
                 pQuery = pQuery.Where(s => s.Nombre.Contains(pMarca.Nombre));//like
+
             pQuery = pQuery.OrderByDescending(s => s.IdMarca).AsQueryable();
+
             if (pMarca.Top_Aux > 0)
                 pQuery = pQuery.Take(pMarca.Top_Aux).AsQueryable();
+
             return pQuery;
         }
 

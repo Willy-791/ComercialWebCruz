@@ -1,4 +1,5 @@
-﻿using ComercialWebEN;
+﻿using ComercialWebDAL;
+using ComercialWebEN;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,9 +23,14 @@ namespace ComercialWebBL
             return await RegistroVentaDAL.EliminarAsync(pRegistroVenta);
         }
 
-        public async Task<RegistroVentaEN> ObtenerTodosPorIdAsync(RegistroVentaEN pRegistroVenta)
+        public async Task<RegistroVentaEN> ObtenerPorIdAsync(RegistroVentaEN pRegistroVenta)
         {
-            return await RegistroVentaDAL.ObtenerTodosPorIdAsync(pRegistroVenta);
+            return await RegistroVentaDAL.ObtenerPorIdAsync(pRegistroVenta);
+        }
+
+        public async Task<List<RegistroVentaEN>> ObtenerTodosAsync()
+        {
+            return await RegistroVentaDAL.ObtenerTodosAsync();
         }
 
         public async Task<List<RegistroVentaEN>> BuscarAsync(RegistroVentaEN pRegistroVenta)

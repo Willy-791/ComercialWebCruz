@@ -1,4 +1,5 @@
-﻿using ComercialWebEN;
+﻿using ComercialWebDAL;
+using ComercialWebEN;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,9 +24,14 @@ namespace ComercialWebBL
             return await EstadoPrestamoDAL.EliminarAsync(pEstadoPrestamo);
         }
 
-        public async Task<EstadoPrestamo> ObtenerTodosPorIdAsync(EstadoPrestamo pEstadoPrestamo)
+        public async Task<EstadoPrestamo> ObtenerPorIdAsync(EstadoPrestamo pEstadoPrestamo)
         {
-            return await EstadoPrestamoDAL.ObtenerTodosPorIdAsync(pEstadoPrestamo);
+            return await EstadoPrestamoDAL.ObtenerPorIdAsync(pEstadoPrestamo);
+        }
+
+        public async Task<List<EstadoPrestamo>> ObtenerTodosAsync()
+        {
+            return await EstadoPrestamoDAL.ObtenerTodosAsync();
         }
 
         public async Task<List<EstadoPrestamo>> BuscarAsync(EstadoPrestamo pEstadoPrestamo)
