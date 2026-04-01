@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ComercialWebDAL;
+using ComercialWebEN;
+using System;
 using System.Collections.Generic;
 using System.Text;
-
-using ComercialWebEN;
-using ComercialWebDAL;
 
 namespace ComercialWebBL
 {
@@ -24,14 +23,24 @@ namespace ComercialWebBL
             return await UsuarioDAL.EliminarAsync(pUsuario);
         }
 
-        public async Task<UsuarioEN> ObtenerTodosPorIdAsync(UsuarioEN pUsuario)
+        public async Task<UsuarioEN> ObtenerPorIdAsync(UsuarioEN pUsuario)
         {
-            return await UsuarioDAL.ObtenerTodosPorIdAsync(pUsuario);
+            return await UsuarioDAL.ObtenerPorId(pUsuario);
+        }
+
+        public async Task<List<UsuarioEN>> ObtenerTodosAsync()
+        {
+            return await UsuarioDAL.ObtenerTodosAsync();
         }
 
         public async Task<List<UsuarioEN>> BuscarAsync(UsuarioEN pUsuario)
         {
             return await UsuarioDAL.BuscarAsync(pUsuario);
+        }
+
+        public async Task<List<UsuarioEN>> BuscarIncluirRolesAsync(UsuarioEN pUsuario)
+        {
+            return await UsuarioDAL.BuscarIncluirRolesAsync(pUsuario);
         }
     }
 }

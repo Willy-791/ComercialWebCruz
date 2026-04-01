@@ -21,7 +21,7 @@ namespace ComercialWebDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=ALDANA_DESK;Initial Catalog=ComercialCruz;Integrated Security=True;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer("Data Source=BDComercialCruz.mssql.somee.com;User ID=William503_SQLLogin_1;Password=***********;Trust Server Certificate=True");
         }
     }
 }
