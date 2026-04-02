@@ -11,7 +11,7 @@ namespace ComercialWebEN
 
         [Key]
         [Required]
-        public int Id { get; set; }
+        public int IdRol { get; set; }
 
         [Required(ErrorMessage ="El Nombre es obligarotio")]
         [StringLength(50, ErrorMessage ="Maximo 50 caracteres")]

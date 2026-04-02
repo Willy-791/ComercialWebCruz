@@ -21,7 +21,7 @@ namespace ComercialWebDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=BDComercialCruz.mssql.somee.com;User ID=William503_SQLLogin_1;Password=***********;Trust Server Certificate=True");
+            optionsBuilder.UseSqlServer("workstation id=BDComercialCruz.mssql.somee.com;packet size=4096;user id=William503_SQLLogin_1;pwd=hsto3232hj;data source=BDComercialCruz.mssql.somee.com;persist security info=False;initial catalog=BDComercialCruz;TrustServerCertificate=True");
         }
     }
 }
