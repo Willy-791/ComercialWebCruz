@@ -38,10 +38,10 @@ namespace ComercialWebBL
             return await RegistroPrestamoDAL.BuscarAsync(pRegistroPrestamo);
         }
 
-        //// Agrega el método para registrar la devolución
-        //public async Task<int> RegistrarDevolucionAsync(RegistroPrestamo pRegistroPrestamo)
-        //{
-        //    return await RegistroPrestamoDAL.RegistrarDevolucionAsync(pRegistroPrestamo);
-        //}
+        // Agrega el método para registrar la devolución
+        public async Task<int> RegistrarDevolucionAsync(RegistroPrestamo pRegistroPrestamo)
+        {
+            return await RegistroPrestamoDAL.RegistrarDevolucionAsync(pRegistroPrestamo);
+        }
     }
 }

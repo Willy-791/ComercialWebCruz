@@ -35,17 +35,16 @@ namespace ComercialWebDAL
             {
                 using (var dbContexto = new DBContexto())
                 {
-                    var Producto = await dbContexto.Producto
+                    var producto = await dbContexto.Producto
                         .FirstOrDefaultAsync(r => r.IdProducto == pProducto.IdProducto);
 
-                    Producto.Nombre = pProducto.Nombre;
-                    Producto.Estado = pProducto.Estado;
-                    Producto.Descripcion = pProducto.Descripcion;
-                    Producto.Precio = pProducto.Precio;
-                    Producto.Stock = pProducto.Stock;
-                    Producto.Estado = pProducto.Estado;
+                    producto.Nombre = pProducto.Nombre;
+                    producto.Descripcion = pProducto.Descripcion;
+                    producto.Precio = pProducto.Precio;
+                    producto.Stock = pProducto.Stock;
+                    producto.Estado = pProducto.Estado;
 
-                    dbContexto.Update(Producto);
+                    dbContexto.Update(producto);
                     result = await dbContexto.SaveChangesAsync();
                 }
                 return result;
@@ -63,10 +62,10 @@ namespace ComercialWebDAL
             {
                 using (var dbContexto = new DBContexto())
                 {
-                    var Producto = await dbContexto.Producto
+                    var producto = await dbContexto.Producto
                         .FirstOrDefaultAsync(x => x.IdProducto == pProducto.IdProducto);
 
-                    dbContexto.Producto.Remove(Producto);
+                    dbContexto.Producto.Remove(producto);
                     result = await dbContexto.SaveChangesAsync();
                 }
                 return result;
@@ -79,15 +78,15 @@ namespace ComercialWebDAL
 
         public static async Task<ProductoEN> ObtenerPorIdAsync(ProductoEN pProducto)
         {
-            ProductoEN Producto = new ProductoEN();
+            ProductoEN producto = new ProductoEN();
             try
             {
                 using (var dbContexto = new DBContexto())
                 {
-                    Producto = await dbContexto.Producto
+                    producto = await dbContexto.Producto
                         .FirstOrDefaultAsync(s => s.IdProducto == pProducto.IdProducto);
                 }
-                return Producto;
+                return producto;
             }
             catch (Exception ex)
             {
@@ -97,14 +96,14 @@ namespace ComercialWebDAL
 
         public static async Task<List<ProductoEN>> ObtenerTodosAsync()
         {
-            List<ProductoEN> Producto = new List<ProductoEN>();
+            var lista = new List<ProductoEN>();
             try
             {
                 using (var dbContexto = new DBContexto())
                 {
-                    Producto = await dbContexto.Producto.ToListAsync();
+                    lista = await dbContexto.Producto.ToListAsync();
                 }
-                return Producto;
+                return lista;
             }
             catch (Exception ex)
             {
@@ -112,7 +111,7 @@ namespace ComercialWebDAL
             }
         }
 
-        internal static IQueryable<ProductoEN> QuerySelect(IQueryable<ProductoEN> pQuery,ProductoEN pProducto)
+        internal static IQueryable<ProductoEN> QuerySelect(IQueryable<ProductoEN> pQuery, ProductoEN pProducto)
         {
             if (pProducto.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pProducto.IdProducto);
@@ -124,7 +123,7 @@ namespace ComercialWebDAL
                 pQuery = pQuery.Where(s => s.IdMarca == pProducto.IdMarca);
 
             if (!string.IsNullOrWhiteSpace(pProducto.Nombre))
-                pQuery = pQuery.Where(s => s.Nombre == pProducto.Nombre);
+                pQuery = pQuery.Where(s => s.Nombre.Contains(pProducto.Nombre));
 
             if (pProducto.Estado)
                 pQuery = pQuery.Where(s => s.Estado == pProducto.Estado);
@@ -137,20 +136,67 @@ namespace ComercialWebDAL
 
         public static async Task<List<ProductoEN>> BuscarAsync(ProductoEN pProducto)
         {
-            var Producto = new List<ProductoEN>();
+            var lista = new List<ProductoEN>();
             try
             {
                 using (var dbContexto = new DBContexto())
                 {
                     var select = dbContexto.Producto.AsQueryable();
                     select = QuerySelect(select, pProducto);
-                    Producto = await select.ToListAsync();
+                    lista = await select.ToListAsync();
                 }
-                return Producto;
+                return lista;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al buscar los Producto: " + ex.Message);
+            }
+        }
+
+        // NUEVOS MÉTODOS
+
+        public static async Task<int> ActualizarStockAsync(int idProducto, int cantidad)
+        {
+            int result = 0;
+            try
+            {
+                using (var dbContexto = new DBContexto())
+                {
+                    var producto = await dbContexto.Producto
+                        .FirstOrDefaultAsync(p => p.IdProducto == idProducto);
+
+                    if (producto != null)
+                    {
+                        producto.Stock += cantidad;
+                        if (producto.Stock < 0)
+                            producto.Stock = 0;
+
+                        dbContexto.Update(producto);
+                        result = await dbContexto.SaveChangesAsync();
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar stock: " + ex.Message);
+            }
+        }
+
+        public static async Task<List<ProductoEN>> ObtenerBajoStockAsync(int stockMinimo)
+        {
+            try
+            {
+                using (var dbContexto = new DBContexto())
+                {
+                    return await dbContexto.Producto
+                        .Where(p => p.Stock <= stockMinimo && p.Estado == true)
+                        .ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener bajo stock: " + ex.Message);
             }
         }
     }

@@ -34,14 +34,9 @@ namespace ComercialWebBL
             return await ClienteDAL.ObtenerTodosAsync();
         }
 
-        //public async Task<List<ClienteEN>> BuscarNombreAsync(ClienteEN pCliente)
-        //{
-        //    return await ClienteDAL.BuscarNombreAsync(pCliente);
-        //}
-
-        //public async Task<List<ClienteEN>> BuscarDocumentoAsync(ClienteEN pCliente)
-        //{
-        //    return await ClienteDAL.BuscarDocumentoAsync(pCliente);
-        //}
+        public async Task<List<ClienteEN>> BuscarAsync(ClienteEN pCliente)
+        {
+            return await ClienteDAL.BuscarAsync(pCliente);
+        }
     }
 }

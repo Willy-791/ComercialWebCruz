@@ -148,5 +148,33 @@ namespace ComercialWebDAL
                 throw new Exception("Error al buscar los RegistroPrestamos: " + ex.Message);
             }
         }
+
+        public static async Task<int> RegistrarDevolucionAsync(RegistroPrestamo pRegistroPrestamo)
+        {
+            int result = 0;
+            try
+            {
+                using (var dbContexto = new DBContexto())
+                {
+                    var registro = await dbContexto.RegistroPrestamos
+                        .FirstOrDefaultAsync(r => r.IdRegistroPrestamo == pRegistroPrestamo.IdRegistroPrestamo);
+
+                    if (registro != null)
+                    {
+                        // Aquí marcas como devuelto
+                        registro.Estado = false; // o true dependiendo cómo lo manejemos el estado
+                        registro.Detalle = pRegistroPrestamo.Detalle;
+
+                        dbContexto.Update(registro);
+                        result = await dbContexto.SaveChangesAsync();
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar la devolución: " + ex.Message);
+            }
+        }
     }
 }

@@ -1,11 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 using ComercialWebEN;
 using ComercialWebDAL;
-
 
 namespace ComercialWebBL
 {
