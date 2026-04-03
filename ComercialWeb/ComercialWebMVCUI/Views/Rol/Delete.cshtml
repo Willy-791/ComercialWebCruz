@@ -1,0 +1,30 @@
+﻿@model ComercialWebEN.RolEN
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4>Eliminar Rol</h4>
+<hr />
+
+<h5>¿Estás seguro que deseas eliminar este rol?</h5>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="IdRol" />
+
+    <div class="form-group">
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+    </div>
+</form>

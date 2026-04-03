@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ComercialWebMVCUI.Controllers
 {
-   
+
     public class RolController : Controller
     {
         RolBL rolbl = new RolBL();
@@ -77,24 +77,27 @@ namespace ComercialWebMVCUI.Controllers
             }
         }
 
-        // GET: RolController/Delete/5
-        public ActionResult Delete(int id)
+        //  ELIMINAR (GET)
+        public async Task<IActionResult> Delete(int IdRol)
         {
-            return View();
+            var rol = await rolbl.ObtenerPorIdAsync(new RolEN { IdRol = IdRol });
+            return View(rol);
         }
 
-        // POST: RolController/Delete/5
+        //  ELIMINAR (POST)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(RolEN pRol)
         {
             try
             {
+                await rolbl.EliminarAsync(pRol);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pRol);
             }
         }
     }
