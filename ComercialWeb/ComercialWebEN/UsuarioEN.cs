@@ -16,12 +16,12 @@ namespace ComercialWebEN
         public int IdRol { get; set; }
 
         [Required(ErrorMessage = "Nombre de usuario es obligatorio")]
-        [StringLength(40, ErrorMessage = "Maximo 40 carecteres")]
+        [StringLength(50, ErrorMessage = "Maximo 50 carecteres")]
         [Display(Name = "Nombre Usuario")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Apellido de usuario es obligatorio")]
-        [StringLength(40, ErrorMessage = "Maximo 40 carecteres")]
+        [StringLength(50, ErrorMessage = "Maximo 50 carecteres")]
         [Display(Name = "Apellido Usuario")]
         public string Apellido { get; set; }
 
@@ -30,7 +30,7 @@ namespace ComercialWebEN
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Password es obligatorio")]
-        [StringLength(40, ErrorMessage = "Maximo 40 carecteres")]
+        [StringLength(50, ErrorMessage = "Maximo 50 carecteres")]
         [Display(Name = "Contraseña")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -46,7 +46,7 @@ namespace ComercialWebEN
         public int Top_Aux { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "Confirmar password es obligatorio")]
-        [StringLength(40, ErrorMessage = "Maximo 40 carecteres")]
+        [StringLength(50, ErrorMessage = "Maximo 50 carecteres")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password y Confirmar password deben ser iguales")]
         [Display(Name = "Confirmar Password")]

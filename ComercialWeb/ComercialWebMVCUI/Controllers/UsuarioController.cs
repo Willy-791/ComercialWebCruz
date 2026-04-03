@@ -1,4 +1,5 @@
 ﻿using ComercialWebBL;
+using ComercialWebDAL;
 using ComercialWebEN;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -61,45 +62,54 @@ namespace ComercialWebMVCUI.Controllers
                 return View(pUsuario);
             }
         }
-        // GET: UsuarioController/Edit/5
-        public ActionResult Edit(int id)
+       
+
+       
+        public async Task<IActionResult> Edit(int IdUsuario)
         {
-            return View();
+            var usuario = await usuarioBL.ObtenerPorIdAsync(new UsuarioEN { IdUsuario = IdUsuario });
+            ViewBag.Error = "";
+            return View(usuario);
         }
 
-        // POST: UsuarioController/Edit/5
+        // POST: RolController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(UsuarioEN pUsuario)
         {
             try
             {
+                await usuarioBL.ModificarAsync(pUsuario);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pUsuario);
             }
         }
 
-        // GET: UsuarioController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: RolController/Delete/5
+        public async Task<IActionResult> Delete(int IdUsuario)
         {
-            return View();
+            var usuario = await usuarioBL.ObtenerPorIdAsync(new UsuarioEN { IdUsuario = IdUsuario });
+            return View(usuario);
         }
 
-        // POST: UsuarioController/Delete/5
+        // POST: RolController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(UsuarioEN pUsuario)
         {
             try
             {
+                await usuarioBL.EliminarAsync(pUsuario);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pUsuario);
             }
         }
     }
