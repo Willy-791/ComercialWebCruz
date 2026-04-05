@@ -1,5 +1,5 @@
 ﻿using ComercialWebBL;
-using ComercialWebDAL;
+
 using ComercialWebEN;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,14 +45,20 @@ namespace ComercialWebMVCUI.Controllers
         }
 
         // POST: UsuarioController/Create
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(UsuarioEN pUsuario)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Roles = await rolBL.ObtenerTodosAsync();
+                return View(pUsuario);
+            }
+
             try
             {
-                int result = await usuarioBL.GuardarAsync(pUsuario);
+                await usuarioBL.GuardarAsync(pUsuario);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -62,9 +68,7 @@ namespace ComercialWebMVCUI.Controllers
                 return View(pUsuario);
             }
         }
-       
 
-       
         public async Task<IActionResult> Edit(int IdUsuario)
         {
             var usuario = await usuarioBL.ObtenerPorIdAsync(new UsuarioEN { IdUsuario = IdUsuario });

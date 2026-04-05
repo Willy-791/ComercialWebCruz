@@ -40,7 +40,9 @@ namespace ComercialWebEN
 
         [Display(Name = "Fecha Registro")]
         public DateTime FechaRegistro { get; set; }
-        public RolEN Rol { get; set; }
+      
+        public RolEN? Rol { get; set; }
+     
 
         [NotMapped]
         public int Top_Aux { get; set; }
@@ -50,6 +52,7 @@ namespace ComercialWebEN
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password y Confirmar password deben ser iguales")]
         [Display(Name = "Confirmar Password")]
+
         public string ConfirmPassword_aux { get; set; }
     }
 

@@ -58,8 +58,7 @@ namespace ComercialWebDAL
             }
             catch (Exception ex)
             {
-                result = 0;
-                throw new Exception(ex.Message);
+                throw;
             }
             return result;
         }
