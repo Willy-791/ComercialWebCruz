@@ -30,9 +30,20 @@ namespace ComercialWebMVCUI.Controllers
             return View(taksBuscar);
         }
         // GET: UsuarioController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int IdUsuario)
         {
-            return View();
+            if (IdUsuario == 0)
+                return RedirectToAction(nameof(Index));
+
+            var lista = await usuarioBL.BuscarIncluirRolesAsync(
+                new UsuarioEN { IdUsuario = IdUsuario });
+
+            var usuario = lista.FirstOrDefault();
+
+            if (usuario == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(usuario);
         }
 
 
@@ -71,8 +82,12 @@ namespace ComercialWebMVCUI.Controllers
 
         public async Task<IActionResult> Edit(int IdUsuario)
         {
-            var usuario = await usuarioBL.ObtenerPorIdAsync(new UsuarioEN { IdUsuario = IdUsuario });
+            var usuario = await usuarioBL.ObtenerPorIdAsync(
+                new UsuarioEN { IdUsuario = IdUsuario });
+
+            ViewBag.Roles = await rolBL.ObtenerTodosAsync();
             ViewBag.Error = "";
+
             return View(usuario);
         }
 
@@ -93,27 +108,37 @@ namespace ComercialWebMVCUI.Controllers
             }
         }
 
-        // GET: RolController/Delete/5
+        // GET: UsuarioController/Delete/5
         public async Task<IActionResult> Delete(int IdUsuario)
         {
-            var usuario = await usuarioBL.ObtenerPorIdAsync(new UsuarioEN { IdUsuario = IdUsuario });
+            if (IdUsuario == 0)
+                return RedirectToAction(nameof(Index));
+
+            var lista = await usuarioBL.BuscarIncluirRolesAsync(
+                new UsuarioEN { IdUsuario = IdUsuario });
+
+            var usuario = lista.FirstOrDefault();
+
+            if (usuario == null)
+                return RedirectToAction(nameof(Index));
+
             return View(usuario);
         }
 
-        // POST: RolController/Delete/5
+        // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(UsuarioEN pUsuario)
+      
+        public async Task<IActionResult> Delete(UsuarioEN usuario)
         {
             try
             {
-                await usuarioBL.EliminarAsync(pUsuario);
+                await usuarioBL.EliminarAsync(usuario);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch
             {
-                ViewBag.Error = ex.Message;
-                return View(pUsuario);
+                return View(usuario);
             }
         }
     }

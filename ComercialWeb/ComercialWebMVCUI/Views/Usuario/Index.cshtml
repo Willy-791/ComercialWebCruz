@@ -120,9 +120,9 @@
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar", "Edit", new { Id = item.IdUsuario }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { Id = item.IdUsuario }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { Id = item.IdUsuario }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Modificar", "Edit", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Ver", "Details", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

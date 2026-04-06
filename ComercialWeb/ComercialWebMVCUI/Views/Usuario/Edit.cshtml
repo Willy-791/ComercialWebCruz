@@ -1,0 +1,94 @@
+﻿@model ComercialWebEN.UsuarioEN
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+    List<ComercialWebEN.RolEN> roles = ViewBag.Roles as List<ComercialWebEN.RolEN>;
+}
+
+<h1>Editar Usuario</h1>
+<hr />
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- Id oculto -->
+    <input type="hidden" asp-for="IdUsuario" />
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Login" class="control-label"></label>
+                <input asp-for="Login" class="form-control" />
+                <span asp-validation-for="Login" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="IdRol" class="control-label"></label>
+                <select asp-for="IdRol" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var item in roles)
+                    {
+                        <option value="@item.IdRol"
+                                selected="@(item.IdRol == Model.IdRol)">
+                            @item.Nombre
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="IdRol" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Estatus" class="control-label"></label>
+                <select asp-for="Estatus" class="form-control">
+                    <option value="1">ACTIVO</option>
+                    <option value="2">INACTIVO</option>
+                </select>
+                <span asp-validation-for="Estatus" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" class="form-control" readonly />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-dark">Regresar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

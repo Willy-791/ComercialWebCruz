@@ -1,0 +1,67 @@
+﻿@model ComercialWebEN.UsuarioEN
+
+@{
+    ViewData["Title"] = "Detalle Usuario";
+}
+
+<h1>Detalle del Usuario</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+
+        <dl class="row">
+
+            <dt class="col-sm-4">
+                Rol
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Rol?.Nombre
+            </dd>
+
+            <dt class="col-sm-4">
+                Nombre
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Nombre
+            </dd>
+
+            <dt class="col-sm-4">
+                Apellido
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Apellido
+            </dd>
+
+            <dt class="col-sm-4">
+                Login
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Login
+            </dd>
+
+            <dt class="col-sm-4">
+                Estado
+            </dt>
+            <dd class="col-sm-8">
+                @(Model.Estatus == 1 ? "ACTIVO" : "INACTIVO")
+            </dd>
+
+            <dt class="col-sm-4">
+                Fecha Registro
+            </dt>
+            <dd class="col-sm-8">
+                @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
+            </dd>
+
+        </dl>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-IdUsuario="@Model.IdUsuario"
+               class="btn btn-primary">Editar</a>
+
+            <a asp-action="Index" class="btn btn-dark">Regresar</a>
+        </div>
+
+    </div>
+</div>

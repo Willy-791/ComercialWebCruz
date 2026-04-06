@@ -189,6 +189,7 @@ namespace ComercialWebDAL
             }
             return usuarios;
         }
+        
         #endregion
 
         public static async Task<List<UsuarioEN>> BuscarIncluirRolesAsync(UsuarioEN pUsuario)

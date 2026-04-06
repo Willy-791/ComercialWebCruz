@@ -29,10 +29,17 @@ namespace ComercialWebMVCUI.Controllers
         // GET: RolController/Details/5
         public async Task<IActionResult> Details(int IdRol)
         {
-            var rol = await rolbl.ObtenerPorIdAsync(new RolEN { IdRol = IdRol });
+            if (IdRol == 0)
+                return RedirectToAction(nameof(Index));
+
+            var rol = await rolbl.ObtenerPorIdAsync(
+                new RolEN { IdRol = IdRol });
+
+            if (rol == null)
+                return RedirectToAction(nameof(Index));
+
             return View(rol);
         }
-
         // GET: RolController/Create
         public IActionResult Create()
         {
