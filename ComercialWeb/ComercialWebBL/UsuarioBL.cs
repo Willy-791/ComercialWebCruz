@@ -42,5 +42,9 @@ namespace ComercialWebBL
         {
             return await UsuarioDAL.BuscarIncluirRolesAsync(pUsuario);
         }
+        public async Task<UsuarioEN> LoginAsync(UsuarioEN pUsuario)
+        {
+            return await UsuarioDAL.LoginAsync(pUsuario);
+        }
     }
 }
