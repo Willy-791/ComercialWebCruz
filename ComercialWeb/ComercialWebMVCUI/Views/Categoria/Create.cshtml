@@ -1,0 +1,25 @@
+﻿@model ComercialWebEN.CategoriaEN
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear Categoría</h1>
+
+<span class="text-danger">@ViewBag.Error</span>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <br />
+    <input type="submit" value="Guardar" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

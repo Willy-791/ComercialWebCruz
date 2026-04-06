@@ -1,0 +1,14 @@
+﻿@model ComercialWebEN.CategoriaEN
+
+<h1>Detalle Categoría</h1>
+
+<div>
+    <strong>ID:</strong> @Model.IdCategoria
+</div>
+<div>
+    <strong>Nombre:</strong> @Model.Nombre
+</div>
+
+<br />
+<a asp-action="Edit" asp-route-IdCategoria="@Model.IdCategoria" class="btn btn-success">Modificar</a>
+<a asp-action="Index" class="btn btn-secondary">Regresar</a>

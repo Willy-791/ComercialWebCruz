@@ -18,7 +18,7 @@ namespace ComercialWebEN
         public string? Nombre { get; set; }
 
         [Required(ErrorMessage ="El estado es obligatorio")]
-        public bool Estado { get; set; }
+        public int Estado { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }

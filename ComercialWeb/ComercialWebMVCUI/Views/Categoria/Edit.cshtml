@@ -1,0 +1,22 @@
+﻿@model ComercialWebEN.CategoriaEN
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar Categoría</h1>
+
+<span class="text-danger">@ViewBag.Error</span>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="IdCategoria" />
+
+    <div class="form-group">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <br />
+    <input type="submit" value="Guardar" class="btn btn-success" />
+    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
+</form>

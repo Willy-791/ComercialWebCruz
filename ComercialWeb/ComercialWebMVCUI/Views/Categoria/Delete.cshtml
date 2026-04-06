@@ -1,0 +1,17 @@
+﻿@model ComercialWebEN.CategoriaEN
+
+<h1>Eliminar Categoría</h1>
+
+<h3>¿Seguro que deseas eliminar este registro?</h3>
+
+<div>
+    <strong>Nombre:</strong> @Model.Nombre
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="IdCategoria" />
+
+    <br />
+    <input type="submit" value="Eliminar" class="btn btn-danger" />
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
