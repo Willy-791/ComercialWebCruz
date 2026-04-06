@@ -1,0 +1,46 @@
+﻿@model ComercialWebEN.ProductoEN
+
+@{
+    ViewData["Title"] = "Actualizar Stock";
+}
+
+<h1>Actualizar Stock</h1>
+
+<h4>ProductoEN</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ActualizarStock">
+            
+            <input type="hidden" asp-for="IdProducto" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label>Producto</label>
+                <input asp-for="Nombre" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Stock Actual</label>
+                <input asp-for="Stock" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <label>Cantidad a agregar o quitar</label>
+                <input type="number" name="cantidad" class="form-control" />
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ComercialWebEN.ProductoEN>
+
+<h1>Bajo Stock</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdProducto</td>
+                <td>@item.Nombre</td>
+                <td>@item.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index">Back to List</a>

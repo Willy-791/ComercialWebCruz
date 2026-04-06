@@ -1,0 +1,32 @@
+﻿@model ComercialWebEN.ProductoEN
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Deseas eliminar este producto ?</h3>
+
+<div>
+    <h4>ProductoEN</h4>
+    <hr />
+    <dl class="row">
+
+        <dt>@Html.DisplayNameFor(m => m.Nombre)</dt>
+        <dd>@Html.DisplayFor(m => m.Nombre)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Precio)</dt>
+        <dd>@Html.DisplayFor(m => m.Precio)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.Stock)</dt>
+        <dd>@Html.DisplayFor(m => m.Stock)</dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdProducto" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

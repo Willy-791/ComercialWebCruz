@@ -1,0 +1,41 @@
+﻿@model ComercialWebEN.ProductoEN
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ProductoEN</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.IdCategoria)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.IdCategoria)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.IdMarca)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.IdMarca)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Nombre)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.Nombre)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Descripcion)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.Descripcion)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Precio)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.Precio)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Stock)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.Stock)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Estado)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(m => m.Estado)</dd>
+
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-IdProducto="@Model.IdProducto">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
