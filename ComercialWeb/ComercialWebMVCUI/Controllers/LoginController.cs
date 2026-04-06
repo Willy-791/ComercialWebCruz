@@ -1,31 +1,43 @@
 ﻿using ComercialWebBL;
 using ComercialWebEN;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 public class LoginController : Controller
 {
     UsuarioBL usuarioBL = new UsuarioBL();
-
+    [AllowAnonymous]
     public IActionResult Login()
     {
         return View();
     }
-    
+
     [HttpPost]
+
+    [AllowAnonymous]
     public async Task<IActionResult> Login(UsuarioEN pUsuario)
     {
-        var usuario = await usuarioBL.LoginAsync(pUsuario);
-
-        if (usuario != null && usuario.IdUsuario > 0)
+        try
         {
-            HttpContext.Session.SetInt32("IdUsuario", usuario.IdUsuario);
-            HttpContext.Session.SetString("Login", usuario.Login);
+            var usuario = await usuarioBL.LoginAsync(pUsuario);
 
-            return RedirectToAction("Index", "Home");
+            if (usuario != null && usuario.IdUsuario > 0)
+            {
+                HttpContext.Session.SetInt32("IdUsuario", usuario.IdUsuario);
+                HttpContext.Session.SetString("Login", usuario.Login);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Error = "Login o contraseña incorrectos";
+            return View();
+
         }
-
-        ViewBag.Error = "Login o contraseña incorrectos";
-        return View();
+        catch (Exception ex)
+        {
+            ViewBag.Error = ex.Message;
+            return View();
+        }
     }
 
     public IActionResult Logout()
