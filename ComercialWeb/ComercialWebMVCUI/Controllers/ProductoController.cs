@@ -1,6 +1,7 @@
-﻿using ComercialWebEN;
+﻿using ComercialWebBL;
+using ComercialWebDAL;
+using ComercialWebEN;
 using Microsoft.AspNetCore.Http;
-using ComercialWebBL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComercialWebMVCUI.Controllers
@@ -8,6 +9,8 @@ namespace ComercialWebMVCUI.Controllers
     public class ProductoController : Controller
     {
         ProductoBL productobl = new ProductoBL();
+        MarcaBL marcaBL = new MarcaBL();
+        CategoriaBL categoriaBL = new CategoriaBL();
 
         // GET: ProductoController
         public async Task<IActionResult> Index(ProductoEN pProducto = null)
@@ -21,7 +24,11 @@ namespace ComercialWebMVCUI.Controllers
                 pProducto.Top_Aux = 0;
 
             var productos = await productobl.BuscarAsync(pProducto);
+
+            ViewBag.Marcas = await marcaBL.ObtenerTodosAsync();
+            ViewBag.Categorias = await categoriaBL.ObtenerTodosAsync();
             ViewBag.Top = pProducto.Top_Aux;
+
             return View(productos);
         }
 
@@ -41,8 +48,10 @@ namespace ComercialWebMVCUI.Controllers
         }
 
         // GET: ProductoController/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Marca = await marcaBL.ObtenerTodosAsync();
+            ViewBag.Categoria = await categoriaBL.ObtenerTodosAsync();
             ViewBag.Error = "";
             return View();
         }
@@ -52,6 +61,12 @@ namespace ComercialWebMVCUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductoEN pProducto)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Marca = await marcaBL.ObtenerTodosAsync();
+                ViewBag.Categoria = await categoriaBL.ObtenerTodosAsync();
+                return View(pProducto);
+            }
             try
             {
                 await productobl.GuardarAsync(pProducto);
@@ -60,6 +75,8 @@ namespace ComercialWebMVCUI.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
+                ViewBag.Marca = await marcaBL.ObtenerTodosAsync();
+                ViewBag.Categoria = await categoriaBL.ObtenerTodosAsync();
                 return View(pProducto);
             }
         }
@@ -70,6 +87,8 @@ namespace ComercialWebMVCUI.Controllers
             var producto = await productobl.ObtenerPorIdAsync(
                 new ProductoEN { IdProducto = IdProducto });
 
+            ViewBag.Marca = await marcaBL.ObtenerTodosAsync();
+            ViewBag.Categoria = await categoriaBL.ObtenerTodosAsync();
             ViewBag.Error = "";
             return View(producto);
         }

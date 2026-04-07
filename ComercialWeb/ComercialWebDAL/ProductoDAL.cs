@@ -199,5 +199,29 @@ namespace ComercialWebDAL
                 throw new Exception("Error al obtener bajo stock: " + ex.Message);
             }
         }
+
+        public static async Task<List<ProductoEN>> BuscarIncluirMarcaAsync(ProductoEN pProducto)
+        {
+            var productos = new List<ProductoEN>();
+            using (var dbContexto = new DBContexto())
+            {
+                var select = dbContexto.Producto.AsQueryable();
+                select = QuerySelect(select, pProducto).Include(s => s.Marca).AsQueryable();
+                productos = await select.ToListAsync();
+            }
+            return productos;
+        }
+
+        public static async Task<List<ProductoEN>> BuscarIncluirCategoriaAsync(ProductoEN pProducto)
+        {
+            var productos = new List<ProductoEN>();
+            using (var dbContexto = new DBContexto())
+            {
+                var select = dbContexto.Producto.AsQueryable();
+                select = QuerySelect(select, pProducto).Include(s => s.Categoria).AsQueryable();
+                productos = await select.ToListAsync();
+            }
+            return productos;
+        }
     }
 }

@@ -21,6 +21,6 @@ namespace ComercialWebEN
 
         [NotMapped]
         public int Top_Aux { get; set; }
-
+        public List<ProductoEN> Producto { get; set; } = null!;
     }
 }

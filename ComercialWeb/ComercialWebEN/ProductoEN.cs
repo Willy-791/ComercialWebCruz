@@ -49,5 +49,8 @@ namespace ComercialWebEN
 
         [NotMapped]
         public int Top_Aux { get; set; }
+
+        public MarcaEN? Marca { get; set; }
+        public CategoriaEN? Categoria { get; set; }
     }
 }
