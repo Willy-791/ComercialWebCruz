@@ -1,0 +1,27 @@
+﻿@model ComercialWebEN.EstadoPrestamo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles de Estado de Préstamo</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+</div>
+
+<div class="form-group">
+    <a asp-action="Edit" asp-route-IdEstadoPrestamo="@Model.IdEstadoPrestamo" class="btn btn-primary">
+        Editar
+    </a>
+    <a asp-action="Index" class="btn btn-dark">
+        Regresar
+    </a>
+</div>
