@@ -1,0 +1,14 @@
+﻿@model ComercialWebEN.ResidenciaEN
+
+<h2>Detalle de Residencia</h2>
+
+<div>
+    <p><strong>ID:</strong> @Model.IdResidencia</p>
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Estado:</strong> @(Model.Estado ? "Activo" : "Inactivo")</p>
+</div>
+
+<br />
+
+<a asp-action="Edit" asp-route-id="@Model.IdResidencia" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

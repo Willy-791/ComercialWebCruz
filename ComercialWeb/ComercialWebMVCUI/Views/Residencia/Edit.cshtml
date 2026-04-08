@@ -1,0 +1,29 @@
+﻿@model ComercialWebEN.ResidenciaEN
+
+<h2>Editar Residencia</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="IdResidencia" />
+
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Estado</label><br />
+        <input asp-for="Estado" type="checkbox" /> Activo
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

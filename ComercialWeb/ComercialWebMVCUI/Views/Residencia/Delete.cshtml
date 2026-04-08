@@ -1,0 +1,17 @@
+﻿@model ComercialWebEN.ResidenciaEN
+
+<h2>Eliminar Residencia</h2>
+
+<h4>¿Estás seguro de eliminar esta residencia?</h4>
+
+<div>
+    <p><strong>Nombre:</strong> @Model.Nombre</p>
+    <p><strong>Estado:</strong> @(Model.Estado ? "Activo" : "Inactivo")</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdResidencia" />
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
