@@ -106,9 +106,13 @@ namespace ComercialWebMVCUI.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
+                ViewBag.Marca = await marcaBL.ObtenerTodosAsync();
+                ViewBag.Categoria = await categoriaBL.ObtenerTodosAsync();
                 return View(pProducto);
             }
+           
         }
+
 
         // GET: ProductoController/Delete/5
         public async Task<IActionResult> Delete(int IdProducto)

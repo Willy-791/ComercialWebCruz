@@ -2,21 +2,20 @@
 
 @{
     ViewData["Title"] = "Details";
+   
 }
 
-<h1>Details</h1>
+<h1>Detalles de Producto </h1>
 
 <div>
-    <h4>ProductoEN</h4>
     <hr />
     <dl class="row">
 
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.IdCategoria)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.IdCategoria)</dd>
+        <dt class="col-sm-4">Categoría</dt>
+        <dd class="col-sm-8">@Model.Categoria?.Nombre</dd>
 
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.IdMarca)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.IdMarca)</dd>
-
+        <dt class="col-sm-4">Marca</dt>
+        <dd class="col-sm-8">@Model.Marca?.Nombre</dd>
         <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Nombre)</dt>
         <dd class="col-sm-8">@Html.DisplayFor(m => m.Nombre)</dd>
 

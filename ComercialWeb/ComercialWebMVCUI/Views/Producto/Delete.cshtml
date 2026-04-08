@@ -16,6 +16,12 @@
         <dt>@Html.DisplayNameFor(m => m.Nombre)</dt>
         <dd>@Html.DisplayFor(m => m.Nombre)</dd>
 
+        <dt>@Html.DisplayName("Categoría")</dt>
+        <dd>@Model.Categoria?.Nombre</dd>
+
+        <dt>@Html.DisplayName("Marca")</dt>
+        <dd>@Model.Marca?.Nombre</dd>
+
         <dt>@Html.DisplayNameFor(m => m.Precio)</dt>
         <dd>@Html.DisplayFor(m => m.Precio)</dd>
 

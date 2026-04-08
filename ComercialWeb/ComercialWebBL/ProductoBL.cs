@@ -48,14 +48,6 @@ namespace ComercialWebBL
             return await ProductoDAL.ObtenerBajoStockAsync(stockMinimo);
         }
 
-        public async Task<List<ProductoEN>> BuscarIncluirMarcaAsync(ProductoEN pProducto)
-        {
-            return await ProductoDAL.BuscarIncluirMarcaAsync(pProducto);
-        }
-
-        public async Task<List<ProductoEN>> BuscarIncluirCategoriaAsync(ProductoEN pProducto)
-        {
-            return await ProductoDAL.BuscarIncluirCategoriaAsync(pProducto);
-        }
+       
     }
 }
