@@ -107,6 +107,8 @@
             <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
             <th>@Html.DisplayNameFor(model => model.Nombre)</th>
             <th>@Html.DisplayNameFor(model => model.Precio)</th>
+            <th>@Html.DisplayNameFor(model => model.IdMarca)</th>
+            <th>@Html.DisplayNameFor(model => model.IdCategoria) </th>
             <th>@Html.DisplayNameFor(model => model.Stock)</th>
             <th>Acciones</th>
         </tr>
@@ -118,6 +120,8 @@
                 <td>@item.IdProducto</td>
                 <td>@item.Nombre</td>
                 <td>@item.Precio</td>
+                <td>@Html.DisplayFor(modelItem => item.Marca.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Categoria.Nombre)</td>
                 <td>@item.Stock</td>
                 <td>
                     @Html.ActionLink("Modificar", "Edit", new { IdProducto = item.IdProducto }, new { @class = "btn btn-success" }) |
