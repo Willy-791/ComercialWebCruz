@@ -38,7 +38,7 @@ namespace ComercialWebDAL
 
                   
                     Categoria.Nombre = pCategoria.Nombre;
-                    Categoria.Estado = pCategoria.Estado;
+                    
 
                     dbContexto.Update(Categoria);
                     result = await dbContexto.SaveChangesAsync();
@@ -114,9 +114,6 @@ namespace ComercialWebDAL
 
             if (!string.IsNullOrWhiteSpace(pCategoria.Nombre))
                 pQuery = pQuery.Where(s => s.Nombre.Contains(pCategoria.Nombre));
-
-            if (pCategoria.Estado == 0 || pCategoria.Estado == 1)
-                pQuery = pQuery.Where(s => s.Estado == pCategoria.Estado);
 
             if (pCategoria.Top_Aux > 0)
                 pQuery = pQuery.Take(pCategoria.Top_Aux);

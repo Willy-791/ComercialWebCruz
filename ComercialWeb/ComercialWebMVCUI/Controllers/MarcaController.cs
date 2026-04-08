@@ -80,8 +80,8 @@ namespace ComercialWebMVCUI.Controllers
             return View(marca);
         }
 
-        // POST: MarcaController/Edit/5
-        [HttpPost]
+        /* POST: MarcaController/Edit/5
+       // [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MarcaEN pMarca)
         {
@@ -101,7 +101,7 @@ namespace ComercialWebMVCUI.Controllers
                 ViewBag.Error = ex.Message;
                 return View(pMarca);
             }
-        }
+        }*/
 
         // GET: MarcaController/Delete/5
         public async Task<IActionResult> Delete(int IdMarca)

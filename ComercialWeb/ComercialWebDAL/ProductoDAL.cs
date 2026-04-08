@@ -42,7 +42,7 @@ namespace ComercialWebDAL
                     producto.Descripcion = pProducto.Descripcion;
                     producto.Precio = pProducto.Precio;
                     producto.Stock = pProducto.Stock;
-                    producto.Estado = pProducto.Estado;
+                  
 
                     dbContexto.Update(producto);
                     result = await dbContexto.SaveChangesAsync();
@@ -126,8 +126,7 @@ namespace ComercialWebDAL
             if (!string.IsNullOrWhiteSpace(pProducto.Nombre))
                 pQuery = pQuery.Where(s => s.Nombre.Contains(pProducto.Nombre));
 
-            if (pProducto.Estado)
-                pQuery = pQuery.Where(s => s.Estado == pProducto.Estado);
+           
 
             if (pProducto.Top_Aux > 0)
                 pQuery = pQuery.Take(pProducto.Top_Aux).AsQueryable();
@@ -196,7 +195,7 @@ namespace ComercialWebDAL
                 using (var dbContexto = new DBContexto())
                 {
                     return await dbContexto.Producto
-                        .Where(p => p.Stock <= stockMinimo && p.Estado == true)
+                        .Where(p => p.Stock <= stockMinimo  == true)
                         .ToListAsync();
                 }
             }

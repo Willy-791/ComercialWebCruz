@@ -17,8 +17,7 @@ namespace ComercialWebEN
         [Display(Name = "Nombre de la categoria")]
         public string? Nombre { get; set; }
 
-        [Required(ErrorMessage ="El estado es obligatorio")]
-        public int Estado { get; set; }
+        
 
         [NotMapped]
         public int Top_Aux { get; set; }
