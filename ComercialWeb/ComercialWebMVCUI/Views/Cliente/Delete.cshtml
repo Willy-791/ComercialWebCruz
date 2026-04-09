@@ -1,0 +1,74 @@
+﻿@model ComercialWebEN.ClienteEN
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<h4>Desactivar Cliente</h4>
+<hr />
+
+<h5>¿Estás seguro que deseas desactivar este cliente?</h5>
+
+<div>
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            Rol
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Rol?.Nombre
+        </dd>
+
+        <dt class="col-sm-3">
+            Residencia
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Residencia?.Nombre
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Celular)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Celular)
+        </dd>
+
+        <dt class="col-sm-3">
+            Estado
+        </dt>
+        <dd class="col-sm-9">
+            @if (Model.Estado)
+            {
+                <span class="badge bg-success">ACTIVO</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">INACTIVO</span>
+            }
+        </dd>
+
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdCliente" />
+
+    <div class="form-group mt-3">
+        <input type="submit" value="Desactivar" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+    </div>
+</form>

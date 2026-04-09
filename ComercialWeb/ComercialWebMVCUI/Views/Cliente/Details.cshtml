@@ -1,0 +1,74 @@
+﻿@model ComercialWebEN.ClienteEN
+
+@{
+    ViewData["Title"] = "Detalle Cliente";
+}
+
+<h1>Detalle del Cliente</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+
+        <dl class="row">
+
+            <dt class="col-sm-4">
+                Rol
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Rol?.Nombre
+            </dd>
+
+            <dt class="col-sm-4">
+                Residencia
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Residencia?.Nombre
+            </dd>
+
+            <dt class="col-sm-4">
+                Nombre
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Nombre
+            </dd>
+
+            <dt class="col-sm-4">
+                Apellido
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Apellido
+            </dd>
+
+            <dt class="col-sm-4">
+                Celular
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Celular
+            </dd>
+
+            <dt class="col-sm-4">
+                Estado
+            </dt>
+            <dd class="col-sm-8">
+                @if (Model.Estado)
+                {
+                    <span class="badge bg-success">ACTIVO</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">INACTIVO</span>
+                }
+            </dd>
+
+        </dl>
+
+        <div class="mt-3">
+            <a asp-action="Edit" asp-route-IdCliente="@Model.IdCliente"
+               class="btn btn-primary">Editar</a>
+
+            <a asp-action="Index" class="btn btn-dark">Regresar</a>
+        </div>
+
+    </div>
+</div>

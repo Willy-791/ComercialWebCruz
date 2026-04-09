@@ -17,7 +17,6 @@ namespace ComercialWebEN
         [Display(Name = "Nombre de la categoria")]
         public string? Nombre { get; set; }
 
-        
 
         [NotMapped]
         public int Top_Aux { get; set; }

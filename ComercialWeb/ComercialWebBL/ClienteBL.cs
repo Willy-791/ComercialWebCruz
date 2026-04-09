@@ -11,6 +11,7 @@ namespace ComercialWebBL
     {
         public async Task<int> GuardarAsync(ClienteEN pCliente)
         {
+            pCliente.Estado = true; 
             return await ClienteDAL.GuardarAsync(pCliente);
         }
 
@@ -37,6 +38,10 @@ namespace ComercialWebBL
         public async Task<List<ClienteEN>> BuscarAsync(ClienteEN pCliente)
         {
             return await ClienteDAL.BuscarAsync(pCliente);
+        }
+        public async Task<List<ClienteEN>> BuscarIncluirResidenciasAsync(ClienteEN pCliente)
+        {
+            return await ClienteDAL.BuscarIncluirResidenciasAsync(pCliente);
         }
     }
 }

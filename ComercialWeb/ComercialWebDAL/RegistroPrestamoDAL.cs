@@ -38,7 +38,6 @@ namespace ComercialWebDAL
                         .FirstOrDefaultAsync(r => r.IdRegistroPrestamo == pRegistroPrestamo.IdRegistroPrestamo);
 
                     RegistroPrestamo.Detalle = pRegistroPrestamo.Detalle;
-                    RegistroPrestamo.Estado = pRegistroPrestamo.Estado;
 
                     dbContexto.Update(RegistroPrestamo);
                     result = await dbContexto.SaveChangesAsync();
@@ -121,9 +120,7 @@ namespace ComercialWebDAL
             if (pRegistroPrestamo.IdEstadoPrestamo > 0)
                 pQuery = pQuery.Where(s => s.IdEstadoPrestamo == pRegistroPrestamo.IdEstadoPrestamo);
 
-            if (pRegistroPrestamo.Estado)
-                pQuery = pQuery.Where(s => s.Estado == pRegistroPrestamo.Estado);
-
+          
             if (pRegistroPrestamo.Top_Aux > 0)
                 pQuery = pQuery.Take(pRegistroPrestamo.Top_Aux).AsQueryable();
 
@@ -161,8 +158,7 @@ namespace ComercialWebDAL
 
                     if (registro != null)
                     {
-                        // Aquí marcas como devuelto
-                        registro.Estado = false; // o true dependiendo cómo lo manejemos el estado
+                       
                         registro.Detalle = pRegistroPrestamo.Detalle;
 
                         dbContexto.Update(registro);

@@ -37,7 +37,7 @@ namespace ComercialWebDAL
                         .FirstOrDefaultAsync(r => r.IdRegistroVenta == pRegistroVenta.IdRegistroVenta);
 
                     RegistroVenta.Detalle = pRegistroVenta.Detalle;
-                    RegistroVenta.Estado = pRegistroVenta.Estado;
+                
 
                     dbContexto.Update(RegistroVenta);
                     result = await dbContexto.SaveChangesAsync();
@@ -115,8 +115,7 @@ namespace ComercialWebDAL
             if (pRegistroVenta.IdProducto > 0)
                 pQuery = pQuery.Where(s => s.IdProducto == pRegistroVenta.IdProducto);
 
-            if (pRegistroVenta.Estado)
-                pQuery = pQuery.Where(s => s.Estado == pRegistroVenta.Estado);
+            
 
             if (pRegistroVenta.Top_Aux > 0)
                 pQuery = pQuery.Take(pRegistroVenta.Top_Aux).AsQueryable();

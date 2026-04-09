@@ -11,10 +11,12 @@ namespace ComercialWebDAL
         public static async Task<int> GuardarAsync(ClienteEN pCliente)
         {
             int result = 0;
+           
             try
             {
                 using (var dbContexto = new DBContexto())
                 {
+                    pCliente.Estado = true;
                     dbContexto.Add(pCliente);
                     result = await dbContexto.SaveChangesAsync();
                 }
@@ -25,6 +27,7 @@ namespace ComercialWebDAL
                 throw new Exception("Error al guardar el Cliente: " + ex.Message);
             }
         }
+        
 
         public static async Task<int> ModificarAsync(ClienteEN pCliente)
         {
@@ -40,6 +43,7 @@ namespace ComercialWebDAL
                     Cliente.Apellido = pCliente.Apellido;
                     Cliente.Celular = pCliente.Celular;
                     Cliente.Estado = pCliente.Estado;
+                    Cliente.IdResidencia = pCliente.IdResidencia;
 
                     dbContexto.Update(Cliente);
                     result = await dbContexto.SaveChangesAsync();
@@ -62,8 +66,12 @@ namespace ComercialWebDAL
                     var Cliente = await dbContexto.Cliente
                         .FirstOrDefaultAsync(x => x.IdCliente == pCliente.IdCliente);
 
-                    dbContexto.Cliente.Remove(Cliente);
-                    result = await dbContexto.SaveChangesAsync();
+                    if (Cliente != null)
+                    {
+                        Cliente.Estado = false; 
+                        dbContexto.Update(Cliente);
+                        result = await dbContexto.SaveChangesAsync();
+                    }
                 }
                 return result;
             }
@@ -126,7 +134,11 @@ namespace ComercialWebDAL
             if (!string.IsNullOrWhiteSpace(pCliente.Celular))
                 pQuery = pQuery.Where(s => s.Celular == pCliente.Celular);
 
-            pQuery = pQuery.Where(s => s.Estado == pCliente.Estado);
+            if (pCliente.Estado_Aux == 1)
+                pQuery = pQuery.Where(s => s.Estado == true);
+
+            if (pCliente.Estado_Aux == 2)
+                pQuery = pQuery.Where(s => s.Estado == false);
 
             if (pCliente.Top_Aux > 0)
                 pQuery = pQuery.Take(pCliente.Top_Aux).AsQueryable();
@@ -152,5 +164,20 @@ namespace ComercialWebDAL
                 throw new Exception("Error al buscar los Cliente: " + ex.Message);
             }
         }
+        public static async Task<List<ClienteEN>> BuscarIncluirResidenciasAsync(ClienteEN pCliente)
+        {
+            var clientes = new List<ClienteEN>();
+            using (var dbContexto = new DBContexto())
+            {
+                var select = dbContexto.Cliente.AsQueryable();
+                select = QuerySelect(select, pCliente)
+             .Include(s => s.Residencia)
+             .Include(s => s.Rol)
+             .AsQueryable();
+                clientes = await select.ToListAsync();
+            }
+            return clientes;
+        }
+
     }
 }

@@ -16,6 +16,12 @@ namespace ComercialWebEN
         [Required(ErrorMessage = "La residencia es obligatoria.")]
         [Display(Name = "Residencia")]
         public int IdResidencia { get; set; }
+        [ForeignKey("Rol")]
+        [Required(ErrorMessage = "El rol es obligatorio.")]
+        [Display(Name = "Rol")]
+        public int IdRol { get; set; }
+
+        public RolEN? Rol { get; set; }
 
         [Required(ErrorMessage = "El Nombre es obligatorio.")]
         [StringLength(50, ErrorMessage = "Maximo 50 caracteres")]
@@ -34,10 +40,14 @@ namespace ComercialWebEN
         public string? Celular { get; set; }
 
         [Required(ErrorMessage = "El estado es obligatorio")]
-        public bool Estado { get; set; }
+        public bool Estado { get; set; } = true;
+
+        public ResidenciaEN? Residencia { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }
-
+        [NotMapped]
+        public int Estado_Aux { get; set; }
     }
+    
 }

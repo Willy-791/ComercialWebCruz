@@ -28,9 +28,6 @@ namespace ComercialWebEN
         [StringLength(250, ErrorMessage = "Maximo 250 caracteres")]
         public string? Detalle { get; set; }
 
-        [Required(ErrorMessage = "El estado es obligatorio")]
-        public bool Estado { get; set; }
-
         [NotMapped]
         public int Top_Aux { get; set; }
 
