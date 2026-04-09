@@ -1,8 +1,5 @@
 ﻿using ComercialWebDAL;
 using ComercialWebEN;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ComercialWebBL
 {
@@ -10,11 +7,28 @@ namespace ComercialWebBL
     {
         public async Task<int> GuardarAsync(RegistroVentaEN pRegistroVenta)
         {
-            return await RegistroVentaDAL.GuardarAsync(pRegistroVenta);
+            ProductoBL productoBL = new ProductoBL();
+
+            var producto = await productoBL.ObtenerPorIdAsync(
+                new ProductoEN { IdProducto = pRegistroVenta.IdProducto });
+
+            if (producto.Stock < pRegistroVenta.Cantidad)
+                throw new Exception("Stock insuficiente");
+
+            pRegistroVenta.FechaVenta = DateTime.Now;
+
+            int result = await RegistroVentaDAL.GuardarAsync(pRegistroVenta);
+
+            await productoBL.ActualizarStockAsync(
+                pRegistroVenta.IdProducto,
+                -pRegistroVenta.Cantidad);
+
+            return result;
         }
 
         public async Task<int> ModificarAsync(RegistroVentaEN pRegistroVenta)
         {
+           // Aquí puedes mejorar luego para ajustar stock dinámicamente basures
             return await RegistroVentaDAL.ModificarAsync(pRegistroVenta);
         }
 
@@ -37,6 +51,5 @@ namespace ComercialWebBL
         {
             return await RegistroVentaDAL.BuscarAsync(pRegistroVenta);
         }
-
     }
 }

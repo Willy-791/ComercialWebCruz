@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace ComercialWebEN
 {
     public class RegistroVentaEN
     {
         [Key]
-        [Required]
         public int IdRegistroVenta { get; set; }
 
         [Required(ErrorMessage = "El cliente es obligatorio.")]
         [ForeignKey("Cliente")]
-        [Display(Name = "Cliente")]
         public int IdCliente { get; set; }
 
-        [ForeignKey("Producto")]
         [Required(ErrorMessage = "El producto es obligatorio.")]
-        [Display(Name = "Producto")]
+        [ForeignKey("Producto")]
         public int IdProducto { get; set; }
 
-        [Display(Name ="Fecha de la venta")]
+        [Required(ErrorMessage = "La cantidad es obligatoria")]
+        [Range(1, 1000)]
+        public int Cantidad { get; set; }
+
         public DateTime FechaVenta { get; set; }
 
-        [StringLength(250, ErrorMessage = "Maximo 250 caracteres")]
+        [StringLength(250)]
         public string? Detalle { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }
 
+        public ClienteEN? Cliente { get; set; }
+        public ProductoEN? Producto { get; set; }
     }
 }

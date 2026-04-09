@@ -1,0 +1,76 @@
+﻿@model ComercialWebEN.RegistroVentaEN
+
+@{
+    ViewData["Title"] = "Edit";
+
+    List<ComercialWebEN.ClienteEN> clientes = ViewBag.Clientes as List<ComercialWebEN.ClienteEN>;
+    List<ComercialWebEN.ProductoEN> productos = ViewBag.Productos as List<ComercialWebEN.ProductoEN>;
+}
+
+<h1>Edit</h1>
+
+<h4>RegistroVenta</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="IdRegistroVenta" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label>Cliente</label>
+                <select asp-for="IdCliente" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var item in clientes)
+                    {
+                        <option value="@item.IdCliente">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="IdCliente" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Producto</label>
+                <select asp-for="IdProducto" class="form-control">
+                    <option value="">Seleccionar</option>
+                    @foreach (var item in productos)
+                    {
+                        <option value="@item.IdProducto">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="IdProducto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cantidad"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Detalle"></label>
+                <input asp-for="Detalle" class="form-control" />
+            </div>
+
+            <span class="text-danger">@ViewBag.Error</span>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

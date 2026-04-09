@@ -1,0 +1,29 @@
+﻿@model ComercialWebEN.RegistroVentaEN
+
+<h1>Detalles de Venta</h1>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-4">Cliente</dt>
+    <dd class="col-sm-8">@Model.Cliente?.Nombre</dd>
+
+    <dt class="col-sm-4">Producto</dt>
+    <dd class="col-sm-8">@Model.Producto?.Nombre</dd>
+
+    <dt class="col-sm-4">Cantidad</dt>
+    <dd class="col-sm-8">@Model.Cantidad</dd>
+
+    <dt class="col-sm-4">Fecha</dt>
+    <dd class="col-sm-8">@Model.FechaVenta</dd>
+
+    <dt class="col-sm-4">Detalle</dt>
+    <dd class="col-sm-8">@Model.Detalle</dd>
+
+</dl>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdRegistroVenta">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

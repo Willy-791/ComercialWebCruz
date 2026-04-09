@@ -1,0 +1,26 @@
+﻿@model ComercialWebEN.RegistroVentaEN
+
+<h1>Delete</h1>
+
+<h3>¿Deseas eliminar esta venta?</h3>
+
+<hr />
+
+<dl class="row">
+
+    <dt>Cliente</dt>
+    <dd>@Model.Cliente?.Nombre</dd>
+
+    <dt>Producto</dt>
+    <dd>@Model.Producto?.Nombre</dd>
+
+    <dt>Cantidad</dt>
+    <dd>@Model.Cantidad</dd>
+
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="IdRegistroVenta" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-action="Index">Back to List</a>
+</form>
