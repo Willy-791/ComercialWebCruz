@@ -1,24 +1,101 @@
 ﻿@model ComercialWebEN.UsuarioEN
 
-<h4>Iniciar Sesión</h4>
-<hr />
+@{
+    Layout = null;
+}
 
-<form asp-action="Login" method="post">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <div class="form-group">
-        <label asp-for="Login"></label>
-        <input asp-for="Login" class="form-control" />
-    </div>
+<style>
+    body {
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-    </div>
+        
+        background: radial-gradient(circle at top, #f5f5f5, #d1d5db);
 
-    <br />
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    <input type="submit" value="Ingresar" class="btn btn-primary" />
+    .login-card {
+        width: 350px;
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
 
-    <span class="text-danger">@ViewBag.Error</span>
+    .form-control {
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+    }
 
-</form>
+    .form-control:focus {
+        border-color: #C9A227;
+        box-shadow: 0 0 0 0.2rem rgba(201,162,39,0.25);
+    }
+
+    .btn-gold {
+        background: #C9A227;
+        color: white;
+        border-radius: 10px;
+        font-weight: 600;
+        border: none;
+    }
+
+    .btn-gold:hover {
+        background: #a8841f;
+    }
+
+    .extra {
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .extra a {
+        color: #C9A227;
+        text-decoration: none;
+    }
+
+    .error {
+        color: red;
+        font-size: 13px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="login-card text-center">
+
+    <h5 class="mb-4">INICIAR SESIÓN</h5>
+
+    <form asp-action="Login" method="post">
+
+        
+        <input asp-for="Login" class="form-control mb-3" placeholder="Nombre de usuario" />
+
+      
+        <input asp-for="Password" type="password" class="form-control mb-3" placeholder="Contraseña" />
+
+        <div class="extra mb-3">
+            <div>
+                <input type="checkbox"> Recordarme
+            </div>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn btn-gold w-100">
+            INGRESAR AL SISTEMA
+        </button>
+
+      
+        <div class="error">
+            @ViewBag.Error
+        </div>
+
+    </form>
+
+</div>
