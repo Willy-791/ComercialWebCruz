@@ -4,20 +4,95 @@
     ViewData["Title"] = "Crear";
 }
 
-<h1>Crear Categoría</h1>
+<style>
+    body {
+        background: #f5f7fa;
+    }
 
-<span class="text-danger">@ViewBag.Error</span>
+    .card-form {
+        max-width: 500px;
+        margin: auto;
+        margin-top: 50px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label>Nombre</label>
-        <input asp-for="Nombre" class="form-control" />
-    </div>
+    .title {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-    <br />
-    <input type="submit" value="Guardar" class="btn btn-primary" />
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</form>
+    .form-control {
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        transition: 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.3);
+        }
+
+    .btn-custom {
+        border-radius: 25px;
+        padding: 8px 18px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+
+        .btn-back:hover {
+            background: #5a6268;
+            color: white;
+        }
+
+    .error-text {
+        display: block;
+        text-align: center;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="card-form">
+    <h2 class="title">➕ Crear Categoría</h2>
+
+    <span class="text-danger error-text">@ViewBag.Error</span>
+
+    <form asp-action="Create">
+        <div class="form-group mb-3">
+            <label><strong>Nombre</strong></label>
+            <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre..." />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="Guardar" class="btn btn-custom btn-save" />
+            <a asp-action="Index" class="btn btn-custom btn-back">Regresar</a>
+        </div>
+    </form>
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

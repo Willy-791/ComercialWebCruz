@@ -1,17 +1,95 @@
 ﻿@model ComercialWebEN.CategoriaEN
 
-<h1>Eliminar Categoría</h1>
+@{
+    ViewData["Title"] = "Eliminar";
+}
 
-<h3>¿Seguro que deseas eliminar este registro?</h3>
+<style>
+    body {
+        background: #f5f7fa;
+    }
 
-<div>
-    <strong>Nombre:</strong> @Model.Nombre
+    .card-delete {
+        max-width: 500px;
+        margin: auto;
+        margin-top: 60px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        border-top: 5px solid #dc3545;
+    }
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #dc3545;
+    }
+
+    .warning {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .detail-box {
+        background: #fff3f3;
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .btn-custom {
+        border-radius: 25px;
+        padding: 8px 18px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #dc3545, #b02a37);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+    .btn-cancel {
+        background: #6c757d;
+        color: white;
+    }
+
+        .btn-cancel:hover {
+            background: #5a6268;
+            color: white;
+        }
+</style>
+
+<div class="card-delete">
+    <h2 class="title">⚠️ Eliminar Categoría</h2>
+
+    <div class="warning">
+        ¿Seguro que deseas eliminar este registro?
+    </div>
+
+    <div class="detail-box">
+        <strong>Nombre:</strong> @Model.Nombre
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdCategoria" />
+
+        <div class="d-flex justify-content-between">
+            <input type="submit" value="Eliminar" class="btn btn-custom btn-delete" />
+            <a asp-action="Index" class="btn btn-custom btn-cancel">Cancelar</a>
+        </div>
+    </form>
 </div>
-
-<form asp-action="Delete">
-    <input type="hidden" asp-for="IdCategoria" />
-
-    <br />
-    <input type="submit" value="Eliminar" class="btn btn-danger" />
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-</form>

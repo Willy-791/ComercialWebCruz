@@ -9,74 +9,166 @@
     int topActual = (int)ViewBag.Top;
 }
 
-<h1>Buscar Categoría</h1>
+<style>
+    body {
+        background: #f5f7fa;
+    }
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index">
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="Nombre" />
-                    </div>
-                </div>
-            </div>
+    /* Barra de búsqueda */
+    .search-bar {
+        background: white;
+        border-radius: 50px;
+        padding: 8px 15px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
 
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Top</label>
-                        <select name="Top_Aux" class="form-control">
-                            @foreach (var item in tops)
-                            {
-                                string strItem = item != -1 ? item.ToString() : "Todos";
-                                if (item != topActual)
-                                {
-                                    <option value="@item">@strItem</option>
-                                }
-                                else
-                                {
-                                    <option selected value="@item">@strItem</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="submit" value="Buscar" class="btn btn-primary" />
-                        <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.IdCategoria)</th>
-            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.IdCategoria</td>
-                <td>@item.Nombre</td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 8px;
         }
-    </tbody>
-</table>
+
+    .search-icon {
+        font-size: 18px;
+        margin-right: 10px;
+        color: gray;
+    }
+
+    .btn-search {
+        border-radius: 30px;
+        padding: 6px 15px;
+        margin-left: 10px;
+    }
+
+    /* Quitar azul */
+    .search-bar input:focus {
+        background-color: white !important;
+        box-shadow: none;
+    }
+
+    .search-bar input:-webkit-autofill,
+    .search-bar input:-webkit-autofill:hover,
+    .search-bar input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+        box-shadow: 0 0 0px 1000px white inset !important;
+        -webkit-text-fill-color: black !important;
+    }
+
+    /* Botón nuevo */
+    .btn-new {
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #000, #434343);
+        color: white;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+        .btn-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+    /* Tabla */
+    .table-custom {
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+        .table-custom thead {
+            background: linear-gradient(135deg, #343a40, #000);
+            color: white;
+        }
+
+        .table-custom tbody tr {
+            transition: 0.2s;
+        }
+
+            .table-custom tbody tr:hover {
+                background-color: #f1f1f1;
+                transform: scale(1.01);
+            }
+
+    /* Botones acciones */
+    .btn-action {
+        border-radius: 20px;
+        padding: 5px 12px;
+        margin: 2px;
+        transition: 0.2s;
+    }
+
+        .btn-action:hover {
+            transform: scale(1.05);
+        }
+
+</style>
+
+<!-- Barra superior -->
+<form asp-action="Index">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div class="search-bar col-md-6">
+            <span class="search-icon">🔍</span>
+            <input type="text" name="Nombre" placeholder="Buscar categoría..." />
+            <button type="submit" class="btn btn-primary btn-search">Buscar</button>
+        </div>
+
+        <div>
+            <a asp-action="Create" class="btn btn-new">+ Nuevo</a>
+        </div>
+
+    </div>
+
+    <!-- Top -->
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <select name="Top_Aux" class="form-control">
+                @foreach (var item in tops)
+                {
+                    string strItem = item != -1 ? item.ToString() : "Todos";
+                    if (item != topActual)
+                    {
+                        <option value="@item">@strItem</option>
+                    }
+                    else
+                    {
+                        <option selected value="@item">@strItem</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-custom">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-success btn-sm btn-action" })
+                        @Html.ActionLink("Ver", "Details", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-info btn-sm btn-action" })
+                        @Html.ActionLink("Eliminar", "Delete", new { IdCategoria = item.IdCategoria }, new { @class = "btn btn-danger btn-sm btn-action" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

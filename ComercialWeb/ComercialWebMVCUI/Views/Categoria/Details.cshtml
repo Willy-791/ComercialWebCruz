@@ -1,14 +1,93 @@
 ﻿@model ComercialWebEN.CategoriaEN
 
-<h1>Detalle Categoría</h1>
+@{
+    ViewData["Title"] = "Detalle";
+}
 
-<div>
-    <strong>ID:</strong> @Model.IdCategoria
-</div>
-<div>
-    <strong>Nombre:</strong> @Model.Nombre
-</div>
+<style>
+    body {
+        background: #f5f7fa;
+    }
 
-<br />
-<a asp-action="Edit" asp-route-IdCategoria="@Model.IdCategoria" class="btn btn-success">Modificar</a>
-<a asp-action="Index" class="btn btn-secondary">Regresar</a>
+    .card-detail {
+        max-width: 500px;
+        margin: auto;
+        margin-top: 60px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+    .detail-item {
+        background: #f8f9fa;
+        padding: 12px 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+        .detail-item strong {
+            color: #333;
+        }
+
+    .btn-custom {
+        border-radius: 25px;
+        padding: 8px 18px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #28a745, #218838);
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+
+        .btn-back:hover {
+            background: #5a6268;
+            color: white;
+        }
+</style>
+
+<div class="card-detail">
+    <h2 class="title">📄 Detalle Categoría</h2>
+
+    <div class="detail-item">
+        <strong>ID:</strong> @Model.IdCategoria
+    </div>
+
+    <div class="detail-item">
+        <strong>Nombre:</strong> @Model.Nombre
+    </div>
+
+    <br />
+
+    <div class="d-flex justify-content-between">
+        <a asp-action="Edit" asp-route-IdCategoria="@Model.IdCategoria" class="btn btn-custom btn-edit">
+            ✏️ Modificar
+        </a>
+
+        <a asp-action="Index" class="btn btn-custom btn-back">
+            ⬅️ Regresar
+        </a>
+    </div>
+</div>
