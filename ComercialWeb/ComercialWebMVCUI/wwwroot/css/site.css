@@ -12716,10 +12716,10 @@ body {
     .sb-sidenav-dark .sb-sidenav-menu .nav-link {
         color: #0f172a; /*color de letras en el menu lateral*/
     }
-    .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
-        color: black !important; /*color de letras en el menu lateral*/
-        background-color: darkgray;
-    }
+        .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
+            color: black !important; /*color de letras en el menu lateral*/
+            background-color: #a8841f;
+        }
 
         .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
             color: rgba(255, 255, 255, 0.25);
