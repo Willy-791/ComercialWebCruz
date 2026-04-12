@@ -10,15 +10,17 @@
     <link rel="stylesheet" href="~/ComercialWebMVCUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Categoria.css" asp-append-version="true" />
     <!-- Font Awesome CDN -->
+  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="@Url.Action("Index", "Home")"> COMERCIAL WEB</a>
-        <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars" style="color: #ffc107;"></i></button>
+        <a class="navbar-brand ps-3 brand-custom"
+               href="@Url.Action("Index", "Home")">
+            COMERCIAL WEB
+        </a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars" style="color: #C9A227;"></i></button>
         <!-- Navbar Search-->
         @*  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
@@ -29,7 +31,7 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw" style="color: #ffc107;"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw" style="color: #9CA3AF;"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="@Url.Action("Login", "Login")">Cerrar Sesión</a></li>
                 
@@ -42,25 +44,92 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Resumen</div>
+                        <div class="sb-sidenav-menu-heading">RESUMEN</div>
+
                         <a class="nav-link" href="@Url.Action("Index", "Home")">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-house" style="color:#ffc107"></i></div>
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-house"></i>
+                            </div>
                             Inicio
                         </a>
-                        <a class="nav-link" href="@Url.Action("SobreNosotros", "Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-info-circle" style="color: #ffc107;"></i></div>
-                            Sobre Nosotros
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Comercial cruz</div>
-                        <a class="nav-link" href="@Url.Action("Index", "Categoria")">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-hand-holding-hand" style="color: #ffc107;"></i></div>
-                            Categoria
-                        </a>
+
+                        <div class="sb-sidenav-menu-heading">COMERCIAL CRUZ</div>
+
                         <a class="nav-link" href="@Url.Action("Index", "Producto")">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar" style="color: #ffc107;"></i></div>
-                            Producto
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            Productos
                         </a>
-                        
+
+                        <a class="nav-link" href="@Url.Action("Index", "Categoria")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-list"></i>
+                            </div>
+                            Categorías
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Marca")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-tags"></i>
+                            </div>
+                            Marcas
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "RegistroVenta")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                            </div>
+                            Ventas
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">PRÉSTAMOS</div>
+
+                        <a class="nav-link" href="@Url.Action("Index", "RegistroPrestamo")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                            </div>
+                            Registro de Préstamos
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "EstadoPrestamo")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-toggle-on"></i>
+                            </div>
+                            Estado de Préstamos
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">CLIENTES</div>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Cliente")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            Clientes
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Residencia")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            Residencias
+                        </a>
+
+                        <div class="sb-sidenav-menu-heading">ADMINISTRACIÓN</div>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Usuario")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            Usuarios
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Rol")">
+                            <div class="sb-nav-link-icon">
+                                <i class="fa-solid fa-users-gear"></i>
+                            </div>
+                            Roles
+                        </a>
                     </div>
                 </div>
                 
