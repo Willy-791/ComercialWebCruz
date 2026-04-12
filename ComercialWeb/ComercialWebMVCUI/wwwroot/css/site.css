@@ -9040,7 +9040,7 @@ textarea.form-control-lg {
 }
 
 .bg-dark {
-    background-color: #138187 !important;
+    background-color: #f1f5f9 !important;
 }
 
 
@@ -12705,16 +12705,16 @@ body {
     }
 
 .sb-sidenav-dark {
-    background-color: #0a5256;
+    background-color: #f1f5f9;
     color: #474040;
 }
 
     .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-        color: #ffffc4; /*color de las diviciones del menu lateral*/
+        color: #64748B; /*color de las diviciones del menu lateral*/
     }
 
     .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-        color: white; /*color de letras en el menu lateral*/
+        color: #0f172a; /*color de letras en el menu lateral*/
     }
     .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
         color: black !important; /*color de letras en el menu lateral*/
