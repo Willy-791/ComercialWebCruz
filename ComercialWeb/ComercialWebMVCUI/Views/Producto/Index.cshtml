@@ -1,10 +1,7 @@
 ﻿@model IEnumerable<ComercialWebEN.ProductoEN>
 
 @{
-    ViewData["Title"] = "Index";
-
-    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
-    int topActual = ViewBag.Top != null ? (int)ViewBag.Top : 10;
+    ViewData["Title"] = "Productos";
 
     List<ComercialWebEN.MarcaEN> marcas =
         ViewBag.Marcas as List<ComercialWebEN.MarcaEN> ?? new List<ComercialWebEN.MarcaEN>();
@@ -13,128 +10,253 @@
         ViewBag.Categorias as List<ComercialWebEN.CategoriaEN> ?? new List<ComercialWebEN.CategoriaEN>();
 }
 
-<h1>Buscar Producto</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="row">
-    <div class="col-md-12">
+<style>
+    body { background: #f4f6f9; }
+    .container-custom { padding: 20px; }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-box {
+        background: #e9edf3;
+        border-radius: 25px;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        width: 280px;
+    }
+
+    .search-box input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex: 1;
+    }
+
+    .btn-search-icon {
+        border: none;
+        background: #d0d7e2;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Quitar azul */
+    .search-box input:focus {
+        background: transparent !important;
+    }
+
+    .search-box input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #e9edf3 inset !important;
+    }
+
+    /* CARDS */
+    .cards {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .card-box {
+        flex: 1;
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .card-title { font-size: 12px; color: gray; }
+    .card-value { font-size: 22px; font-weight: bold; }
+
+    /* FILTROS */
+    .filters {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .filters input, .filters select {
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        background: white;
+    }
+
+    /* TABLA */
+    .table-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    tbody tr:hover {
+        background: #f1f3f5;
+        transform: scale(1.01);
+    }
+
+    /* BOTONES */
+    .btn-new {
+        background: #c89b3c;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .acciones a {
+        margin-right: 10px;
+        color: #6c757d;
+    }
+
+    .acciones a:hover {
+        color: black;
+        transform: scale(1.2);
+    }
+
+    /* STOCK BAJO */
+    .stock-bajo {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container-custom">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h4><b>Inventario de Productos</b></h4>
+
         <form asp-action="Index" method="get">
-            <div class="row">
-
-                <div class="col-4">
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" class="form-control" name="Nombre" />
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="form-group">
-                        <label>Precio</label>
-                        <input type="number" step="0.01" class="form-control" name="Precio" />
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="form-group">
-                        <label>Stock</label>
-                        <input type="number" class="form-control" name="Stock" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-2">
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Top</label>
-                        <select name="Top_Aux" class="form-control">
-                            @foreach (var item in tops)
-                            {
-                                string txt = item != -1 ? item.ToString() : "Todos";
-                                <option value="@item" selected="@(item == topActual)">
-                                    @txt
-                                </option>
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Marca</label>
-                        <select name="IdMarca" class="form-control">
-                            <option value="0">Seleccionar Marca</option>
-                            @foreach (var item in marcas)
-                            {
-                                <option value="@item.IdMarca">@item.Nombre</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Categoría</label>
-                        <select name="IdCategoria" class="form-control">
-                            <option value="0">Seleccionar Categoría</option>
-                            @foreach (var item in categorias)
-                            {
-                                <option value="@item.IdCategoria">@item.Nombre</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="submit" value="Buscar" class="btn btn-primary" />
-                    <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                    <a asp-action="BajoStock" class="btn btn-warning">Bajo Stock</a>
-                </div>
+            <div class="search-box">
+                <input type="text" name="Nombre" placeholder="Buscar producto..."
+                       value="@Context.Request.Query["Nombre"]" />
+                <button type="submit" class="btn-search-icon">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </form>
     </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+        <div class="card-box">
+            <div class="card-title">TOTAL PRODUCTOS</div>
+            <div class="card-value">@Model.Count()</div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">STOCK BAJO</div>
+            <div class="card-value">
+                @Model.Count(x => x.Stock < 10)
+            </div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">CATEGORÍAS</div>
+            <div class="card-value">@categorias.Count</div>
+        </div>
+    </div>
+
+    <!-- FILTROS -->
+    <form asp-action="Index" method="get">
+        <div class="filters">
+
+            <select name="IdMarca">
+                <option value="0">Marca</option>
+                @foreach (var item in marcas)
+                {
+                    <option value="@item.IdMarca"
+                        selected="@(Context.Request.Query["IdMarca"] == item.IdMarca.ToString())">
+                        @item.Nombre
+                    </option>
+                }
+            </select>
+
+            <select name="IdCategoria">
+                <option value="0">Categoría</option>
+                @foreach (var item in categorias)
+                {
+                    <option value="@item.IdCategoria"
+                        selected="@(Context.Request.Query["IdCategoria"] == item.IdCategoria.ToString())">
+                        @item.Nombre
+                    </option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h6><b>Lista de Productos</b></h6>
+
+            <div>
+                <a asp-action="Create" class="btn btn-new">
+                    <i class="fa fa-plus"></i> Agregar
+                </a>
+
+                <a asp-action="BajoStock" class="btn btn-warning">
+                    <i class="fa fa-exclamation-triangle"></i>
+                </a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Marca</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Categoria?.Nombre</td>
+                        <td>@item.Marca?.Nombre</td>
+
+                        <td class="@(item.Stock < 10 ? "stock-bajo" : "")">
+                            @item.Stock
+                        </td>
+
+                        <td>$@item.Precio</td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-IdProducto="@item.IdProducto">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-IdProducto="@item.IdProducto">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-IdProducto="@item.IdProducto">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <a asp-action="ActualizarStock" asp-route-idProducto="@item.IdProducto">
+                                <i class="fa fa-boxes"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
-
-<hr />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.IdProducto)</th>
-            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.Precio)</th>
-            <th>@Html.DisplayNameFor(model => model.IdMarca)</th>
-            <th>@Html.DisplayNameFor(model => model.IdCategoria) </th>
-            <th>@Html.DisplayNameFor(model => model.Stock)</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model ?? new List<ComercialWebEN.ProductoEN>())
-        {
-            <tr>
-                <td>@item.IdProducto</td>
-                <td>@item.Nombre</td>
-                <td>@item.Precio</td>
-                <td>@Html.DisplayFor(modelItem => item.Marca.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.Categoria.Nombre)</td>
-                <td>@item.Stock</td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { IdProducto = item.IdProducto }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { IdProducto = item.IdProducto }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { IdProducto = item.IdProducto }, new { @class = "btn btn-danger" }) |
-
-                    <a asp-action="ActualizarStock"
-                           asp-route-idProducto="@item.IdProducto"
-                           class="btn btn-warning">
-                        Stock
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

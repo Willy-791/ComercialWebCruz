@@ -1,39 +1,124 @@
 ﻿@model ComercialWebEN.ProductoEN
 
 @{
-    ViewData["Title"] = "Details";
-   
+    ViewData["Title"] = "Detalle Producto";
 }
 
-<h1>Detalles de Producto </h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div>
-    <hr />
-    <dl class="row">
+<style>
+    body {
+        background: #f4f6f9;
+    }
 
-        <dt class="col-sm-4">Categoría</dt>
-        <dd class="col-sm-8">@Model.Categoria?.Nombre</dd>
+    .detail-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        <dt class="col-sm-4">Marca</dt>
-        <dd class="col-sm-8">@Model.Marca?.Nombre</dd>
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Nombre)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.Nombre)</dd>
+    .detail-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Descripcion)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.Descripcion)</dd>
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
 
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Precio)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.Precio)</dd>
+        .detail-item:last-child {
+            border-bottom: none;
+        }
 
-        <dt class="col-sm-4">@Html.DisplayNameFor(m => m.Stock)</dt>
-        <dd class="col-sm-8">@Html.DisplayFor(m => m.Stock)</dd>
+    .label {
+        font-weight: bold;
+        color: #555;
+    }
 
-        
+    .value {
+        color: #333;
+    }
 
-    </dl>
-</div>
+    .stock-bajo {
+        color: red;
+        font-weight: bold;
+    }
 
-<div>
-    <a asp-action="Edit" asp-route-IdProducto="@Model.IdProducto">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    .btn-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin: 5px;
+        padding: 8px 20px;
+        border-radius: 8px;
+    }
+
+    .btn-edit {
+        background: #17a2b8;
+        color: white;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+</style>
+
+<div class="detail-container">
+
+    <h4 class="detail-title">
+        <i class="fa fa-box"></i> Detalle del Producto
+    </h4>
+
+    <div class="detail-item">
+        <span class="label">Categoría</span>
+        <span class="value">@Model.Categoria?.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Marca</span>
+        <span class="value">@Model.Marca?.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Nombre</span>
+        <span class="value">@Model.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Descripción</span>
+        <span class="value">@Model.Descripcion</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Precio</span>
+        <span class="value">$@Model.Precio</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Stock</span>
+        <span class="value @(Model.Stock < 10 ? "stock-bajo" : "")">
+            @Model.Stock
+        </span>
+    </div>
+
+    <!-- BOTONES -->
+    <div class="btn-group">
+        <a asp-action="Edit" asp-route-IdProducto="@Model.IdProducto" class="btn btn-edit">
+            <i class="fa fa-pen"></i> Editar
+        </a>
+
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
 </div>

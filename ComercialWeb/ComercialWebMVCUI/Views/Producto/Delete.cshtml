@@ -1,38 +1,109 @@
 ﻿@model ComercialWebEN.ProductoEN
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Producto";
 }
 
-<h1>Delete</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h3>Deseas eliminar este producto ?</h3>
+<style>
+    body {
+        background: #f4f6f9;
+    }
 
-<div>
-    <h4>ProductoEN</h4>
-    <hr />
-    <dl class="row">
+    .delete-container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+    }
 
-        <dt>@Html.DisplayNameFor(m => m.Nombre)</dt>
-        <dd>@Html.DisplayFor(m => m.Nombre)</dd>
+    .delete-title {
+        margin-bottom: 10px;
+    }
 
-        <dt>@Html.DisplayName("Categoría")</dt>
-        <dd>@Model.Categoria?.Nombre</dd>
+    .warning {
+        color: red;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
 
-        <dt>@Html.DisplayName("Marca")</dt>
-        <dd>@Model.Marca?.Nombre</dd>
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+    }
 
-        <dt>@Html.DisplayNameFor(m => m.Precio)</dt>
-        <dd>@Html.DisplayFor(m => m.Precio)</dd>
+        .detail-item:last-child {
+            border-bottom: none;
+        }
 
-        <dt>@Html.DisplayNameFor(m => m.Stock)</dt>
-        <dd>@Html.DisplayFor(m => m.Stock)</dd>
+    .btn {
+        padding: 8px 20px;
+        margin: 5px;
+        border-radius: 8px;
+    }
 
-    </dl>
+    .btn-delete {
+        background: #dc3545;
+        color: white;
+    }
 
-    <form asp-action="Delete">
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+</style>
+
+<div class="delete-container">
+
+    <h4 class="delete-title">
+        <i class="fa fa-trash"></i> Eliminar Producto
+    </h4>
+
+    <div class="warning">
+        ⚠ ¿Estás seguro de eliminar este producto?
+    </div>
+
+    <div class="detail-item">
+        <span><b>Nombre</b></span>
+        <span>@Model.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span><b>Categoría</b></span>
+        <span>@Model.Categoria?.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span><b>Marca</b></span>
+        <span>@Model.Marca?.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span><b>Precio</b></span>
+        <span>$@Model.Precio</span>
+    </div>
+
+    <div class="detail-item">
+        <span><b>Stock</b></span>
+        <span>@Model.Stock</span>
+    </div>
+
+    <form asp-action="Delete" class="mt-3">
         <input type="hidden" asp-for="IdProducto" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+
+        <button type="submit" class="btn btn-delete">
+            <i class="fa fa-trash"></i> Eliminar
+        </button>
+
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa fa-arrow-left"></i> Cancelar
+        </a>
     </form>
+
 </div>

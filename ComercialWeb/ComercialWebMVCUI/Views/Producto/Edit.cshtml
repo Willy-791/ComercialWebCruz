@@ -1,88 +1,131 @@
 ﻿@model ComercialWebEN.ProductoEN
 
 @{
-    ViewData["Title"] = "Edit";
-    
+    ViewData["Title"] = "Editar Producto";
+
     List<ComercialWebEN.MarcaEN> marcas = ViewBag.Marca as List<ComercialWebEN.MarcaEN>;
     List<ComercialWebEN.CategoriaEN> categorias = ViewBag.Categoria as List<ComercialWebEN.CategoriaEN>;
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h1>Edit</h1>
+<style>
+    body {
+        background: #f4f6f9;
+    }
 
-<h4>ProductoEN</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <input type="hidden" asp-for="IdProducto" />
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    .form-title {
+        margin-bottom: 20px;
+    }
 
-            <div class="form-group">
-                <label asp-for="IdCategoria"></label>
-                <select asp-for="IdCategoria" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @if (categorias != null)
-                    {
-                        foreach (var item in categorias)
-                        {
-                            <option value="@item.IdCategoria">@item.Nombre</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="IdCategoria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdMarca"></label>
-                <select asp-for="IdMarca" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @if (marcas != null)
-                    {
-                        foreach (var item in marcas)
-                        {
-                            <option value="@item.IdMarca">@item.Nombre</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="IdMarca" class="text-danger"></span>
-            </div>
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-            <div class="form-group">
-                <label asp-for="Nombre"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+    .form-control {
+        border-radius: 10px;
+    }
 
-            <div class="form-group">
-                <label asp-for="Descripcion"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
+    .btn-save {
+        background: #28a745;
+        color: white;
+        border-radius: 8px;
+    }
 
-            <div class="form-group">
-                <label asp-for="Precio"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
+    .btn-back {
+        background: #6c757d;
+        color: white;
+        border-radius: 8px;
+    }
+</style>
 
-            <div class="form-group">
-                <label asp-for="Stock"></label>
-                <input asp-for="Stock" class="form-control" />
-                <span asp-validation-for="Stock" class="text-danger"></span>
-            </div>
+<div class="form-container">
 
-           
+    <h4 class="form-title">
+        <i class="fa fa-pen"></i> Editar Producto
+    </h4>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="IdProducto" />
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Categoría -->
+        <div class="form-group">
+            <label>Categoría</label>
+            <select asp-for="IdCategoria" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in categorias ?? new List<ComercialWebEN.CategoriaEN>())
+                {
+                    <option value="@item.IdCategoria"
+                            selected="@(item.IdCategoria == Model.IdCategoria)">
+                        @item.Nombre
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Marca -->
+        <div class="form-group">
+            <label>Marca</label>
+            <select asp-for="IdMarca" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in marcas ?? new List<ComercialWebEN.MarcaEN>())
+                {
+                    <option value="@item.IdMarca"
+                            selected="@(item.IdMarca == Model.IdMarca)">
+                        @item.Nombre
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label>Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+            <label>Descripción</label>
+            <input asp-for="Descripcion" class="form-control" />
+        </div>
+
+        <!-- Precio -->
+        <div class="form-group">
+            <label>Precio</label>
+            <input asp-for="Precio" class="form-control" />
+        </div>
+
+        <!-- Stock -->
+        <div class="form-group">
+            <label>Stock</label>
+            <input asp-for="Stock" class="form-control" />
+        </div>
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-between mt-3">
+            <a asp-action="Index" class="btn btn-back">
+             Volver
+            </a>
+
+            <button type="submit" class="btn btn-save">
+             Guardar
+            </button>
+        </div>
+
+    </form>
+
 </div>
 
 @section Scripts {

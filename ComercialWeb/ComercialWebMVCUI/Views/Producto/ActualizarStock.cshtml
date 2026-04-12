@@ -4,43 +4,110 @@
     ViewData["Title"] = "Actualizar Stock";
 }
 
-<h1>Actualizar Stock</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h4>ProductoEN</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ActualizarStock">
-            
-            <input type="hidden" asp-for="IdProducto" />
+<style>
+    body {
+        background: #f4f6f9;
+    }
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    .form-container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-            <div class="form-group">
-                <label>Producto</label>
-                <input asp-for="Nombre" class="form-control" readonly />
-            </div>
+    .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-            <div class="form-group">
-                <label>Stock Actual</label>
-                <input asp-for="Stock" class="form-control" readonly />
-            </div>
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-            <div class="form-group">
-                <label>Cantidad a agregar o quitar</label>
-                <input type="number" name="cantidad" class="form-control" />
-            </div>
+    .form-control {
+        border-radius: 10px;
+    }
 
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-            </div>
+    .stock-actual {
+        font-weight: bold;
+    }
 
-        </form>
-    </div>
+    .stock-bajo {
+        color: red;
+    }
+
+    .btn {
+        padding: 8px 20px;
+        margin: 5px;
+        border-radius: 8px;
+    }
+
+    .btn-save {
+        background: #28a745;
+        color: white;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+</style>
+
+<div class="form-container">
+
+    <h4 class="form-title">
+        <i class="fa fa-boxes"></i> Actualizar Stock
+    </h4>
+
+    <form asp-action="ActualizarStock">
+
+        <input type="hidden" asp-for="IdProducto" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Producto -->
+        <div class="form-group">
+            <label>Producto</label>
+            <input asp-for="Nombre" class="form-control" readonly />
+        </div>
+
+        <!-- Stock actual -->
+        <div class="form-group">
+            <label>Stock Actual</label>
+            <input asp-for="Stock"
+                   class="form-control stock-actual @(Model.Stock < 10 ? "stock-bajo" : "")"
+                   readonly />
+        </div>
+
+        <!-- Cantidad -->
+        <div class="form-group">
+            <label>Cantidad (+ o -)</label>
+            <input type="number" name="cantidad" class="form-control"
+                   placeholder="Ej: 5 o -3" />
+        </div>
+
+        <!-- BOTONES -->
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-back">
+                <i class="fa fa-arrow-left"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-save">
+                <i class="fa fa-save"></i> Actualizar
+            </button>
+        </div>
+
+    </form>
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

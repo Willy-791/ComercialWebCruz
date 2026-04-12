@@ -1,25 +1,111 @@
 ﻿@model IEnumerable<ComercialWebEN.ProductoEN>
 
-<h1>Bajo Stock</h1>
+@{
+    ViewData["Title"] = "Productos con Bajo Stock";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Stock</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.IdProducto</td>
-                <td>@item.Nombre</td>
-                <td>@item.Stock</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<a asp-action="Index">Back to List</a>
+<style>
+    body {
+        background: #f4f6f9;
+    }
+
+    .container-custom {
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .card-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .card-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: red;
+    }
+
+    .table-box {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    tbody tr:hover {
+        background: #f1f3f5;
+        transform: scale(1.01);
+    }
+
+    .stock-bajo {
+        color: red;
+        font-weight: bold;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="container-custom">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h4><i class="fa fa-exclamation-triangle"></i> Productos con Bajo Stock</h4>
+
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
+    <!-- CARD RESUMEN -->
+    <div class="card-box">
+        <div class="card-title">TOTAL PRODUCTOS CON STOCK BAJO</div>
+        <div class="card-value">
+            @Model.Count()
+        </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="table-box">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td class="stock-bajo">
+                            <i class="fa fa-exclamation-circle"></i> @item.Stock
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
