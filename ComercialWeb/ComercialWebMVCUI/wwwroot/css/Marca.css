@@ -1,0 +1,191 @@
+﻿/* FONDO GENERAL */
+body {
+    background: #f4f6fb;
+}
+
+/* CONTENEDOR */
+.container-custom {
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* BUSCADOR */
+.search-box {
+    background: #eef2ff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    width: 260px;
+}
+
+    .search-box input {
+        border: none;
+        background: transparent;
+        outline: none;
+        flex: 1;
+        padding: 5px;
+    }
+
+.btn-search-icon {
+    border: none;
+    background: #dbe4ff;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-search-icon:hover {
+        background: #c7d2fe;
+        transform: scale(1.1);
+    }
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card-box {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+    .card-box:hover {
+        transform: translateY(-5px);
+    }
+
+.card-title {
+    font-size: 12px;
+    color: gray;
+}
+
+.card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4f46e5; /* Color distintivo para Marca */
+}
+
+/* TABLA */
+.table-box {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+tbody tr:hover {
+    background: #eef2ff;
+    transform: scale(1.01);
+}
+
+/* BOTON AGREGAR */
+.btn-new {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: white;
+    border-radius: 8px;
+}
+
+/* BOTONES GENERALES */
+.btn-custom {
+    border-radius: 25px;
+    padding: 8px 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* GUARDAR */
+.btn-save {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    border: none;
+}
+
+/* VOLVER */
+.btn-back {
+    background: #6c757d;
+    color: white;
+}
+
+/* ELIMINAR */
+.btn-delete {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: white;
+    border: none;
+}
+
+/* EDITAR */
+.btn-edit {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+}
+
+/* FORMULARIOS */
+.card-form,
+.card-detail,
+.card-delete {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* DELETE */
+.card-delete {
+    border-top: 5px solid #ef4444;
+}
+
+/* TITULOS */
+.title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* INPUT */
+.form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* DETALLE */
+.detail-item {
+    background: #f9fafb;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* ACCIONES */
+.acciones a {
+    margin-right: 10px;
+    color: #6b7280;
+    transition: 0.2s;
+}
+
+    .acciones a:hover {
+        color: #111827;
+        transform: scale(1.2);
+    }

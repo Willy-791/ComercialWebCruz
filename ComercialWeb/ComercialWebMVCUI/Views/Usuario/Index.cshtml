@@ -1,130 +1,136 @@
 ﻿@model IEnumerable<ComercialWebEN.UsuarioEN>
 
 @{
-    ViewData["Title"] = "Index";
-    int numPage = 0;
-    int numRegistros = 0;
-    int numRegistrosPorPage = 10;
+    ViewData["Title"] = "Usuarios";
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = (int)ViewBag.Top;
     List<ComercialWebEN.RolEN> roles = ViewBag.Roles as List<ComercialWebEN.RolEN>;
 }
 
-<h1>Buscar Usuario</h1>
-<div class="row">
-    <div class="col-md-12">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="container-custom">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h4><b><i class="fa-solid fa-users"></i> Usuarios</b></h4>
+
+        <a asp-action="Create" class="btn btn-new">
+            <i class="fa fa-plus"></i> Nuevo Usuario
+        </a>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="table-box mb-3">
         <form asp-action="Index">
             <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Apellido</label>
-                        <input type="text" class="form-control" name="apellido" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Login</label>
-                        <input type="text" class="form-control" name="login" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Rol</label>
-                        <select name="idrol" class="form-control">
-                            <option value="0">Seleccionar Rol</option>
-                            @foreach (var item in roles)
-                            {
-                                <option value="@item.IdRol">@item.Nombre</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+
                 <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Top</label>
-                        <select name="top_aux" class="form-control">
-                            @foreach (var item in tops)
-                            {
-                                string strItem = item != -1 ? item.ToString() : "Todos";
-                                if (item != topActual)
-                                {
-                                    <option value="@item">@strItem</option>
-                                }
-                                else
-                                {
-                                    <option selected value="@item">@strItem</option>
-                                }
-                            }
-                        </select>
-                    </div>
+                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" />
                 </div>
+
+                <div class="col-md-3">
+                    <input type="text" name="apellido" class="form-control" placeholder="Apellido" />
+                </div>
+
+                <div class="col-md-3">
+                    <input type="text" name="login" class="form-control" placeholder="Login" />
+                </div>
+
+                <div class="col-md-3">
+                    <select name="idrol" class="form-control">
+                        <option value="0">Rol</option>
+                        @foreach (var item in roles)
+                        {
+                            <option value="@item.IdRol">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="submit" value="Buscar" class="btn btn-primary" />
-                        <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                    </div>
+
+            <div class="row mt-2">
+
+                <div class="col-md-3">
+                    <select name="top_aux" class="form-control">
+                        @foreach (var item in tops)
+                        {
+                            string strItem = item != -1 ? item.ToString() : "Todos";
+                            if (item != topActual)
+                            {
+                                <option value="@item">@strItem</option>
+                            }
+                            else
+                            {
+                                <option selected value="@item">@strItem</option>
+                            }
+                        }
+                    </select>
                 </div>
+
+                <div class="col-md-9 text-end">
+                    <button type="submit" class="btn btn-custom btn-save">
+                        <i class="fa fa-search"></i> Buscar
+                    </button>
+                </div>
+
             </div>
         </form>
     </div>
-</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdRol)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Login)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rol.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Login)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaRegistro)
-                </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <!-- CARD -->
+    <div class="cards">
+        <div class="card-box">
+            <div class="card-title">TOTAL USUARIOS</div>
+            <div class="card-value">@Model.Count()</div>
+        </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <h6><b>Lista de Usuarios</b></h6>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Login</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Rol.Nombre</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellido</td>
+                        <td>@item.Login</td>
+                        <td>@item.FechaRegistro</td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-IdUsuario="@item.IdUsuario">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-IdUsuario="@item.IdUsuario">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-IdUsuario="@item.IdUsuario">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

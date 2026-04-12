@@ -1,0 +1,161 @@
+﻿/* FONDO GENERAL */
+body {
+    background: #f3f6f4;
+}
+
+/* CONTENEDOR */
+.container-custom {
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card-box {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+    .card-box:hover {
+        transform: translateY(-5px);
+    }
+
+.card-title {
+    font-size: 12px;
+    color: gray;
+}
+
+.card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #16a34a; /* Verde usuarios */
+}
+
+/* TABLA */
+.table-box {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.table {
+    margin-top: 10px;
+}
+
+tbody tr {
+    transition: 0.2s;
+}
+
+    tbody tr:hover {
+        background: #ecfdf5;
+        transform: scale(1.01);
+    }
+
+/* FILTROS */
+.form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* BOTON NUEVO */
+.btn-new {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 15px;
+}
+
+/* BOTONES GENERALES */
+.btn-custom {
+    border-radius: 25px;
+    padding: 8px 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* BOTON BUSCAR */
+.btn-save {
+    background: linear-gradient(135deg, #22c55e, #15803d);
+    color: white;
+    border: none;
+}
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    }
+
+/* ACCIONES */
+.acciones a {
+    margin-right: 10px;
+    color: #6b7280;
+    transition: 0.2s;
+}
+
+    .acciones a:hover {
+        transform: scale(1.2);
+    }
+
+    /* COLORES DE ICONOS */
+    .acciones a:nth-child(1):hover {
+        color: #22c55e; /* editar */
+    }
+
+    .acciones a:nth-child(2):hover {
+        color: #3b82f6; /* ver */
+    }
+
+    .acciones a:nth-child(3):hover {
+        color: #ef4444; /* eliminar */
+    }
+
+/* FORMULARIOS (CREATE, EDIT, DELETE) */
+.card-form,
+.card-detail,
+.card-delete {
+    max-width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* BORDE ROJO EN DELETE */
+.card-delete {
+    border-top: 5px solid #ef4444;
+}
+
+/* TITULOS */
+.title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* DETALLES */
+.detail-item {
+    background: #f0fdf4;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
