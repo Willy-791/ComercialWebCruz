@@ -1,25 +1,47 @@
 ﻿@model ComercialWebEN.RolEN
 
-<h4>Editar Rol</h4>
-<hr />
+@{
+    ViewData["Title"] = "Editar Rol";
+}
 
-<form asp-action="Edit" method="post">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <input type="hidden" asp-for="IdRol" />
+<div class="form-container">
 
-    <div class="form-group">
-        <label asp-for="Nombre"></label>
-        <input asp-for="Nombre" class="form-control" />
-    </div>
+    <h4 class="form-title">
+        <i class="fa fa-pen"></i> Editar Rol
+    </h4>
 
+    <form asp-action="Edit" method="post">
 
-    <br />
+        <input type="hidden" asp-for="IdRol" />
 
-    <input type="submit" value="Guardar" class="btn btn-primary" />
-    <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-</form>
+        <!-- Nombre -->
+        <div class="form-group">
+            <label>Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-cancel">
+                <i class="fa fa-arrow-left"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-save">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+
+    </form>
+
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,39 +1,45 @@
 ﻿@model ComercialWebEN.RolEN
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Rol";
 }
 
-<h4>Crear Rol</h4>
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<div class="form-container">
 
-<form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+    <h4 class="form-title">
+        <i class="fa fa-plus"></i> Crear Rol
+    </h4>
+
+    <form asp-action="Create">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Nombre -->
+        <div class="form-group">
+            <label>Nombre</label>
+            <input asp-for="Nombre" class="form-control" placeholder=" Rol " />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-dark">Cancelar</a>
-            </div>
+        <!-- BOTONES -->
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-cancel">
+                <i class="fa fa-arrow-left"></i> Cancelar
+            </a>
+
+            <button type="submit" class="btn btn-save">
+                <i class="fa fa-save"></i> Guardar
+            </button>
         </div>
-    </div>
-    
-</form>
+
+    </form>
+
+</div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-

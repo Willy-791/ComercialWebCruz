@@ -1,87 +1,93 @@
 ﻿@model IEnumerable<ComercialWebEN.RolEN>
 
 @{
-    ViewData["Title"] = "Index";
-    int numPage = 1;
-    int numRegistro = 0;
-    int numregistrosPorPage = 10;
+    ViewData["Title"] = "Roles";
+
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
-    int topActual = (int)ViewBag.Top;
+    int topActual = ViewBag.Top != null ? (int)ViewBag.Top : 10;
 }
 
-<h1>Buscar Rol</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Top</label>
-                        <select name="top_aux" class="form-control">
-                            @{
-                                foreach (var item in tops)
-                                {
-                                    string strIttem = item != -1 ? item.ToString() : "Todos";
-                                    if (item != topActual)
-                                    {
-                                        <option value="@item">@strIttem</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item" selected>@strIttem</option>
-                                    }
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
+<div class="container-custom">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="submit" value="Buscar" class="btn btn-primary" />
-                        <a asp-action="Create" class="btn btn-success">Crear</a>
-                    </div>
-                </div>
+    <!-- HEADER -->
+    <div class="header">
+        <h4><i class="fa fa-user-shield"></i> Roles</h4>
+
+        <form asp-action="Index" method="get">
+            <div class="search-box">
+                <input type="text" name="nombre" placeholder="Buscar rol..."
+                       value="@Context.Request.Query["nombre"]" />
+                <button class="btn-search" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </form>
     </div>
+
+    <!-- FILTRO TOP -->
+    <form asp-action="Index" method="get">
+        <div class="filters">
+
+            <select name="top_aux">
+                @foreach (var item in tops)
+                {
+                    string txt = item != -1 ? item.ToString() : "Todos";
+                    <option value="@item"
+                            selected="@(item == topActual)">
+                        @txt
+                    </option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h6><b>Lista de Roles</b></h6>
+
+            <a asp-action="Create" class="btn btn-new">
+                <i class="fa fa-plus"></i> Agregar
+            </a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-IdRol="@item.IdRol">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-IdRol="@item.IdRol">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-IdRol="@item.IdRol">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                Acciones
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { IdRol = item.IdRol }, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Ver", "Details", new { IdRol = item.IdRol }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Eliminar", "Delete", new { IdRol = item.IdRol }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

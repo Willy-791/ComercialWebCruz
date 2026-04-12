@@ -1,30 +1,35 @@
 ﻿@model ComercialWebEN.RolEN
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Rol";
 }
 
-<h4>Eliminar Rol</h4>
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h5>¿Estás seguro que deseas eliminar este rol?</h5>
+<div class="delete-container">
 
-<div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
-</div>
+    <h4 class="delete-title">
+        <i class="fa fa-trash"></i> Eliminar Rol
+    </h4>
 
-<form asp-action="Delete">
-    <input type="hidden" asp-for="IdRol" />
-
-    <div class="form-group">
-        <input type="submit" value="Eliminar" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+    <div class="warning">
+        ⚠ ¿Estás seguro de eliminar este rol?
     </div>
-</form>
+
+    <div class="detail-item">
+        <b>Nombre:</b> @Model.Nombre
+    </div>
+
+    <form asp-action="Delete" class="mt-3">
+        <input type="hidden" asp-for="IdRol" />
+
+        <button type="submit" class="btn btn-delete">
+            <i class="fa fa-trash"></i> Eliminar
+        </button>
+
+        <a asp-action="Index" class="btn btn-cancel">
+            <i class="fa fa-arrow-left"></i> Cancelar
+        </a>
+    </form>
+
+</div>
