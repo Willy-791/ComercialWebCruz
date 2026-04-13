@@ -1,29 +1,51 @@
 ﻿@model ComercialWebEN.RegistroVentaEN
 
-<h1>Detalles de Venta</h1>
+@{
+    ViewData["Title"] = "Detalle de Venta";
+}
 
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<dl class="row">
+<div class="detail-container">
 
-    <dt class="col-sm-4">Cliente</dt>
-    <dd class="col-sm-8">@Model.Cliente?.Nombre</dd>
+    <h4 class="detail-title">
+        <i class="fa fa-file-invoice"></i> Detalle de Venta
+    </h4>
 
-    <dt class="col-sm-4">Producto</dt>
-    <dd class="col-sm-8">@Model.Producto?.Nombre</dd>
+    <div class="detail-item">
+        <span class="label">Cliente</span>
+        <span class="value">@Model.Cliente?.Nombre</span>
+    </div>
 
-    <dt class="col-sm-4">Cantidad</dt>
-    <dd class="col-sm-8">@Model.Cantidad</dd>
+    <div class="detail-item">
+        <span class="label">Producto</span>
+        <span class="value">@Model.Producto?.Nombre</span>
+    </div>
 
-    <dt class="col-sm-4">Fecha</dt>
-    <dd class="col-sm-8">@Model.FechaVenta</dd>
+    <div class="detail-item">
+        <span class="label">Cantidad</span>
+        <span class="value">@Model.Cantidad</span>
+    </div>
 
-    <dt class="col-sm-4">Detalle</dt>
-    <dd class="col-sm-8">@Model.Detalle</dd>
+    <div class="detail-item">
+        <span class="label">Fecha</span>
+        <span class="value">@Model.FechaVenta</span>
+    </div>
 
-</dl>
+    <div class="detail-item">
+        <span class="label">Detalle</span>
+        <span class="value">@Model.Detalle</span>
+    </div>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdRegistroVenta">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <!-- BOTONES -->
+    <div class="btn-group">
+        <a asp-action="Edit" asp-route-id="@Model.IdRegistroVenta" class="btn btn-edit">
+            <i class="fa fa-pen"></i> Editar
+        </a>
+
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa fa-arrow-left"></i> Volver
+        </a>
+    </div>
+
 </div>

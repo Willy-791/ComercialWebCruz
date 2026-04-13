@@ -1,86 +1,96 @@
 ﻿@model ComercialWebEN.RegistroPrestamoEN
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Préstamo";
 
     List<ComercialWebEN.ClienteEN> clientes = ViewBag.Clientes as List<ComercialWebEN.ClienteEN>;
     List<ComercialWebEN.ProductoEN> productos = ViewBag.Productos as List<ComercialWebEN.ProductoEN>;
     List<ComercialWebEN.EstadoPrestamoEN> estados = ViewBag.Estados as List<ComercialWebEN.EstadoPrestamoEN>;
 }
 
-<h1>Edit</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h4>RegistroPrestamo</h4>
-<hr />
+<div class="form-container">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <h4 class="form-title">
+        <i class="fa fa-pen"></i> Editar Préstamo
+    </h4>
 
-            <input type="hidden" asp-for="IdRegistroPrestamo" />
+    <form asp-action="Edit">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdRegistroPrestamo" />
 
-            <div class="form-group">
-                <label>Cliente</label>
-                <select asp-for="IdCliente" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @foreach (var item in clientes)
-                    {
-                        <option value="@item.IdCliente">@item.Nombre</option>
-                    }
-                </select>
-            </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label>Producto</label>
-                <select asp-for="IdProducto" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @foreach (var item in productos)
-                    {
-                        <option value="@item.IdProducto">@item.Nombre</option>
-                    }
-                </select>
-            </div>
+        <!-- Cliente -->
+        <div class="form-group">
+            <label>Cliente</label>
+            <select asp-for="IdCliente" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in clientes)
+                {
+                    <option value="@item.IdCliente">@item.Nombre</option>
+                }
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label>Estado</label>
-                <select asp-for="IdEstadoPrestamo" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @foreach (var item in estados)
-                    {
-                        <option value="@item.IdEstadoPrestamo">@item.Nombre</option>
-                    }
-                </select>
-            </div>
+        <!-- Producto -->
+        <div class="form-group">
+            <label>Producto</label>
+            <select asp-for="IdProducto" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in productos)
+                {
+                    <option value="@item.IdProducto">@item.Nombre</option>
+                }
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Cantidad"></label>
-                <input asp-for="Cantidad" class="form-control" />
-            </div>
+        <!-- Estado -->
+        <div class="form-group">
+            <label>Estado</label>
+            <select asp-for="IdEstadoPrestamo" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in estados)
+                {
+                    <option value="@item.IdEstadoPrestamo">@item.Nombre</option>
+                }
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="FechaFin"></label>
-                <input asp-for="FechaFin" type="date" class="form-control" />
-            </div>
+        <!-- Cantidad -->
+        <div class="form-group">
+            <label asp-for="Cantidad"></label>
+            <input asp-for="Cantidad" class="form-control" />
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Detalle"></label>
-                <input asp-for="Detalle" class="form-control" />
-            </div>
+        <!-- Fecha Fin -->
+        <div class="form-group">
+            <label asp-for="FechaFin"></label>
+            <input asp-for="FechaFin" type="date" class="form-control" />
+        </div>
 
-            <span class="text-danger">@ViewBag.Error</span>
+        <!-- Detalle -->
+        <div class="form-group">
+            <label asp-for="Detalle"></label>
+            <input asp-for="Detalle" class="form-control" />
+        </div>
 
-            <div class="form-group mt-2">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+        <span class="text-danger">@ViewBag.Error</span>
 
-        </form>
-    </div>
-</div>
+        <!-- BOTONES -->
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-back">
+                <i class="fa fa-arrow-left"></i> Volver
+            </a>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+            <button type="submit" class="btn btn-save">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+
+    </form>
+
 </div>
 
 @section Scripts {

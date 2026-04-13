@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ComercialWebEN.RegistroVentaEN>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ventas";
 
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = ViewBag.Top != null ? (int)ViewBag.Top : 10;
@@ -13,88 +13,118 @@
         ViewBag.Productos as List<ComercialWebEN.ProductoEN> ?? new List<ComercialWebEN.ProductoEN>();
 }
 
-<h1>Buscar Ventas</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index" method="get">
-            <div class="row">
+<div class="container-custom">
 
-                <div class="col-4">
-                    <label>Cliente</label>
-                    <select name="IdCliente" class="form-control">
-                        <option value="0">Seleccionar Cliente</option>
-                        @foreach (var item in clientes)
-                        {
-                            <option value="@item.IdCliente">@item.Nombre</option>
-                        }
-                    </select>
-                </div>
+    <!-- HEADER -->
+    <div class="header">
+        <h4><b>Registro de Ventas</b></h4>
 
-                <div class="col-4">
-                    <label>Producto</label>
-                    <select name="IdProducto" class="form-control">
-                        <option value="0">Seleccionar Producto</option>
-                        @foreach (var item in productos)
-                        {
-                            <option value="@item.IdProducto">@item.Nombre</option>
-                        }
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-md-3">
-                    <label>Top</label>
-                    <select name="Top_Aux" class="form-control">
-                        @foreach (var item in tops)
-                        {
-                            string txt = item != -1 ? item.ToString() : "Todos";
-                            <option value="@item" selected="@(item == topActual)">
-                                @txt
-                            </option>
-                        }
-                    </select>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="submit" value="Buscar" class="btn btn-primary" />
-                    <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                </div>
-            </div>
-        </form>
+        <a asp-action="Create" class="btn btn-new">
+            <i class="fa fa-plus"></i> Nueva Venta
+        </a>
     </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+        <div class="card-box">
+            <div class="card-title">TOTAL VENTAS</div>
+            <div class="card-value">@((Model ?? new List<ComercialWebEN.RegistroVentaEN>()).Count())</div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">CLIENTES</div>
+            <div class="card-value">@clientes.Count</div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">PRODUCTOS</div>
+            <div class="card-value">@productos.Count</div>
+        </div>
+    </div>
+
+    <!-- FILTROS -->
+    <form asp-action="Index" method="get">
+        <div class="filters">
+
+            <select name="IdCliente">
+                <option value="0">Cliente</option>
+                @foreach (var item in clientes)
+                {
+                    <option value="@item.IdCliente">@item.Nombre</option>
+                }
+            </select>
+
+            <select name="IdProducto">
+                <option value="0">Producto</option>
+                @foreach (var item in productos)
+                {
+                    <option value="@item.IdProducto">@item.Nombre</option>
+                }
+            </select>
+
+            <select name="Top_Aux">
+                @foreach (var item in tops)
+                {
+                    string txt = item != -1 ? item.ToString() : "Todos";
+                    <option value="@item" selected="@(item == topActual)">
+                        @txt
+                    </option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i> Buscar
+            </button>
+        </div>
+    </form>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h6><b>Lista de Ventas</b></h6>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model ?? new List<ComercialWebEN.RegistroVentaEN>())
+                {
+                    <tr>
+                        <td>@item.Cliente?.Nombre</td>
+                        <td>@item.Producto?.Nombre</td>
+                        <td>@item.Cantidad</td>
+                        <td>@item.FechaVenta</td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-id="@item.IdRegistroVenta" title="Editar">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-id="@item.IdRegistroVenta" title="Ver">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.IdRegistroVenta" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
-
-<hr />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model ?? new List<ComercialWebEN.RegistroVentaEN>())
-        {
-            <tr>
-                <td>@item.Cliente?.Nombre</td>
-                <td>@item.Producto?.Nombre</td>
-                <td>@item.Cantidad</td>
-                <td>@item.FechaVenta</td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdRegistroVenta }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { id = item.IdRegistroVenta }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRegistroVenta }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

@@ -1,66 +1,78 @@
 ﻿@model ComercialWebEN.RegistroVentaEN
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nueva Venta";
 
     List<ComercialWebEN.ClienteEN> clientes = ViewBag.Clientes as List<ComercialWebEN.ClienteEN>;
     List<ComercialWebEN.ProductoEN> productos = ViewBag.Productos as List<ComercialWebEN.ProductoEN>;
 }
 
-<h1>Create</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h4>RegistroVenta</h4>
-<hr />
+<div class="form-container">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <h4 class="form-title">
+        <i class="fa fa-plus"></i> Nueva Venta
+    </h4>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-action="Create">
 
-            <div class="form-group">
-                <label>Cliente</label>
-                <select asp-for="IdCliente" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @foreach (var item in clientes)
-                    {
-                        <option value="@item.IdCliente">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdCliente" class="text-danger"></span>
-            </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label>Producto</label>
-                <select asp-for="IdProducto" class="form-control">
-                    <option value="">Seleccionar</option>
-                    @foreach (var item in productos)
-                    {
-                        <option value="@item.IdProducto">@item.Nombre</option>
-                    }
-                </select>
-                <span asp-validation-for="IdProducto" class="text-danger"></span>
-            </div>
+        <!-- Cliente -->
+        <div class="form-group">
+            <label>Cliente</label>
+            <select asp-for="IdCliente" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in clientes)
+                {
+                    <option value="@item.IdCliente">@item.Nombre</option>
+                }
+            </select>
+            <span asp-validation-for="IdCliente" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Cantidad"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
+        <!-- Producto -->
+        <div class="form-group">
+            <label>Producto</label>
+            <select asp-for="IdProducto" class="form-control">
+                <option value="">Seleccionar</option>
+                @foreach (var item in productos)
+                {
+                    <option value="@item.IdProducto">@item.Nombre</option>
+                }
+            </select>
+            <span asp-validation-for="IdProducto" class="text-danger"></span>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Detalle"></label>
-                <input asp-for="Detalle" class="form-control" />
-            </div>
+        <!-- Cantidad -->
+        <div class="form-group">
+            <label asp-for="Cantidad"></label>
+            <input asp-for="Cantidad" class="form-control" />
+            <span asp-validation-for="Cantidad" class="text-danger"></span>
+        </div>
 
-            <span class="text-danger">@ViewBag.Error</span>
+        <!-- Detalle -->
+        <div class="form-group">
+            <label asp-for="Detalle"></label>
+            <input asp-for="Detalle" class="form-control" />
+        </div>
 
-            <div class="form-group mt-2">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+        <span class="text-danger">@ViewBag.Error</span>
 
-        </form>
-    </div>
+        <!-- BOTONES -->
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-back">
+                <i class="fa fa-arrow-left"></i> Volver
+            </a>
+
+            <button type="submit" class="btn btn-save">
+                <i class="fa fa-save"></i> Guardar
+            </button>
+        </div>
+
+    </form>
+
 </div>
 
 @section Scripts {

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ComercialWebEN.RegistroPrestamoEN>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Préstamos";
 
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = ViewBag.Top != null ? (int)ViewBag.Top : 10;
@@ -16,103 +16,160 @@
         ViewBag.Estados as List<ComercialWebEN.EstadoPrestamoEN> ?? new List<ComercialWebEN.EstadoPrestamoEN>();
 }
 
-<h1>Buscar Préstamos</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="row">
-    <div class="col-md-12">
+<div class="container-custom">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h4><b>Gestión de Préstamos</b></h4>
+
         <form asp-action="Index" method="get">
-            <div class="row">
-
-                <div class="col-4">
-                    <label>Cliente</label>
-                    <select name="IdCliente" class="form-control">
-                        <option value="0">Seleccionar Cliente</option>
-                        @foreach (var item in clientes)
-                        {
-                            <option value="@item.IdCliente">@item.Nombre</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="col-4">
-                    <label>Producto</label>
-                    <select name="IdProducto" class="form-control">
-                        <option value="0">Seleccionar Producto</option>
-                        @foreach (var item in productos)
-                        {
-                            <option value="@item.IdProducto">@item.Nombre</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="col-4">
-                    <label>Estado</label>
-                    <select name="IdEstadoPrestamo" class="form-control">
-                        <option value="0">Seleccionar Estado</option>
-                        @foreach (var item in estados)
-                        {
-                            <option value="@item.IdEstadoPrestamo">@item.Nombre</option>
-                        }
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-md-3">
-                    <label>Top</label>
-                    <select name="Top_Aux" class="form-control">
-                        @foreach (var item in tops)
-                        {
-                            string txt = item != -1 ? item.ToString() : "Todos";
-                            <option value="@item" selected="@(item == topActual)">
-                                @txt
-                            </option>
-                        }
-                    </select>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <input type="submit" value="Buscar" class="btn btn-primary" />
-                    <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                </div>
+            <div class="search-box">
+                <input type="text" name="Detalle" placeholder="Buscar por detalle..."
+                       value="@Context.Request.Query["Detalle"]" />
+                <button type="submit" class="btn-search-icon">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </form>
     </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+        <div class="card-box">
+            <div class="card-title">TOTAL PRÉSTAMOS</div>
+            <div class="card-value">@Model.Count()</div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">PENDIENTES</div>
+            <div class="card-value">
+                @Model.Count(x => x.EstadoPrestamo?.Nombre.ToLower() == "pendiente")
+            </div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-title">PAGADOS</div>
+            <div class="card-value">
+                @Model.Count(x => x.EstadoPrestamo?.Nombre.ToLower() == "pagado")
+            </div>
+        </div>
+    </div>
+
+    <!-- FILTROS -->
+    <form asp-action="Index" method="get">
+        <div class="filters">
+
+            <select name="IdCliente">
+                <option value="0">Cliente</option>
+                @foreach (var item in clientes)
+                {
+                    <option value="@item.IdCliente">@item.Nombre</option>
+                }
+            </select>
+
+            <select name="IdProducto">
+                <option value="0">Producto</option>
+                @foreach (var item in productos)
+                {
+                    <option value="@item.IdProducto">@item.Nombre</option>
+                }
+            </select>
+
+            <select name="IdEstadoPrestamo">
+                <option value="0">Estado</option>
+                @foreach (var item in estados)
+                {
+                    <option value="@item.IdEstadoPrestamo">@item.Nombre</option>
+                }
+            </select>
+
+            <select name="Top_Aux">
+                @foreach (var item in tops)
+                {
+                    string txt = item != -1 ? item.ToString() : "Todos";
+                    <option value="@item" selected="@(item == topActual)">
+                        @txt
+                    </option>
+                }
+            </select>
+
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h6><b>Lista de Préstamos</b></h6>
+
+            <a asp-action="Create" class="btn btn-new">
+                <i class="fa fa-plus"></i> Nuevo
+            </a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model ?? new List<ComercialWebEN.RegistroPrestamoEN>())
+                {
+                    var estado = item.EstadoPrestamo?.Nombre?.ToLower();
+
+                    <tr>
+                        <td>@item.Cliente?.Nombre</td>
+                        <td>@item.Producto?.Nombre</td>
+                        <td>@item.Cantidad</td>
+
+                        <!-- ESTADO CON COLOR 🔥 -->
+                        <td>
+                            @if (estado == "pendiente")
+                            {
+                                <span class="badge bg-warning text-dark">Pendiente</span>
+                            }
+                            else if (estado == "pagado")
+                            {
+                                <span class="badge bg-success">Pagado</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@item.EstadoPrestamo?.Nombre</span>
+                            }
+                        </td>
+
+                        <td>@item.FechaInicio</td>
+                        <td>@item.FechaFin</td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-id="@item.IdRegistroPrestamo">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-id="@item.IdRegistroPrestamo">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.IdRegistroPrestamo">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
-
-<hr />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Estado</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model ?? new List<ComercialWebEN.RegistroPrestamoEN>())
-        {
-            <tr>
-                <td>@item.Cliente?.Nombre</td>
-                <td>@item.Producto?.Nombre</td>
-                <td>@item.Cantidad</td>
-                <td>@item.EstadoPrestamo?.Nombre</td>
-                <td>@item.FechaInicio</td>
-                <td>@item.FechaFin</td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

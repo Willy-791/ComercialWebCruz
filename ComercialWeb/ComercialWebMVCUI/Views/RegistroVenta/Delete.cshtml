@@ -1,26 +1,46 @@
 ﻿@model ComercialWebEN.RegistroVentaEN
 
-<h1>Delete</h1>
+@{
+    ViewData["Title"] = "Eliminar Venta";
+}
 
-<h3>¿Deseas eliminar esta venta?</h3>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<hr />
+<div class="delete-container">
 
-<dl class="row">
+    <h4 class="delete-title">
+        <i class="fa fa-trash"></i> Eliminar Venta
+    </h4>
 
-    <dt>Cliente</dt>
-    <dd>@Model.Cliente?.Nombre</dd>
+    <div class="warning">
+        ⚠ ¿Estás seguro de eliminar esta venta?
+    </div>
 
-    <dt>Producto</dt>
-    <dd>@Model.Producto?.Nombre</dd>
+    <div class="detail-item">
+        <span><b>Cliente</b></span>
+        <span>@Model.Cliente?.Nombre</span>
+    </div>
 
-    <dt>Cantidad</dt>
-    <dd>@Model.Cantidad</dd>
+    <div class="detail-item">
+        <span><b>Producto</b></span>
+        <span>@Model.Producto?.Nombre</span>
+    </div>
 
-</dl>
+    <div class="detail-item">
+        <span><b>Cantidad</b></span>
+        <span>@Model.Cantidad</span>
+    </div>
 
-<form asp-action="Delete">
-    <input type="hidden" asp-for="IdRegistroVenta" />
-    <input type="submit" value="Delete" class="btn btn-danger" /> |
-    <a asp-action="Index">Back to List</a>
-</form>
+    <form asp-action="Delete" class="mt-3">
+        <input type="hidden" asp-for="IdRegistroVenta" />
+
+        <button type="submit" class="btn btn-delete">
+            <i class="fa fa-trash"></i> Eliminar
+        </button>
+
+        <a asp-action="Index" class="btn btn-back">
+            <i class="fa fa-arrow-left"></i> Cancelar
+        </a>
+    </form>
+
+</div>
