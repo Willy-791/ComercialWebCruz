@@ -120,7 +120,7 @@
                             @item.Stock
                         </td>
 
-                        <td>$@item.Precio</td>
+                        <td>$@item.Precio.ToString("N2")</td>
 
                         <td class="acciones">
                             <a asp-action="Edit" asp-route-IdProducto="@item.IdProducto">

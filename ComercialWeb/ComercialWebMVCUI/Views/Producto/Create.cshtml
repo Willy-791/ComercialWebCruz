@@ -60,12 +60,20 @@
         </div>
 
         <!-- Precio -->
+    
         <div class="form-group">
             <label>Precio</label>
-            <input asp-for="Precio" class="form-control" />
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input asp-for="Precio"
+                       class="form-control"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       placeholder="0.00" />
+            </div>
             <span asp-validation-for="Precio" class="text-danger"></span>
         </div>
-
         <!-- Stock -->
         <div class="form-group">
             <label>Stock</label>

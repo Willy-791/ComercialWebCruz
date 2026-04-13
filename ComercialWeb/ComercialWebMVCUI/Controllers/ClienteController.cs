@@ -148,5 +148,12 @@ namespace ComercialWebMVCUI.Controllers
                 return View(cliente);
             }
         }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (HttpContext.Session.GetInt32("IdUsuario") == null)
+            {
+                context.Result = RedirectToAction("Login", "login");
+            }
+        }
     }
 }

@@ -21,10 +21,11 @@
     }
 
     .login-card {
-        width: 350px;
+        width: 100%;
+        max-width: 450px; /* tamaño máximo */
         background: #ffffff;
         border-radius: 15px;
-        padding: 30px;
+        padding: 60px; /* también más espacio interno */
         box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
 
@@ -61,15 +62,16 @@
 <div class="login-card text-center">
 
     <h5 class="mb-4">INICIAR SESIÓN</h5>
-
+    <br />
     <form asp-action="Login" method="post">
 
         
         <input asp-for="Login" class="form-control mb-3" placeholder="Nombre de usuario" />
-
+      
       
         <input asp-for="Password" type="password" class="form-control mb-3" placeholder="Contraseña" />
-
+        <br />
+       
         <button type="submit" class="btn btn-gold w-100">
             INGRESAR AL SISTEMA
         </button>

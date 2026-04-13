@@ -3,6 +3,7 @@ using ComercialWebDAL;
 using ComercialWebEN;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ComercialWebMVCUI.Controllers
 {
@@ -170,6 +171,13 @@ namespace ComercialWebMVCUI.Controllers
         {
             var productos = await productobl.ObtenerBajoStockAsync(stockMinimo);
             return View(productos);
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (HttpContext.Session.GetInt32("IdUsuario") == null)
+            {
+                context.Result = RedirectToAction("Login", "login");
+            }
         }
     }
 }

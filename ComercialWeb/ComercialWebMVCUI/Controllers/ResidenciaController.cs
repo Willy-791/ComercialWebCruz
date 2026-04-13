@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ComercialWebBL;
 using ComercialWebEN;
-using ComercialWebBL;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 public class ResidenciaController : Controller
 {
@@ -58,5 +59,12 @@ public class ResidenciaController : Controller
     {
         var res = await residenciaBL.ObtenerPorIdAsync(new ResidenciaEN { IdResidencia = id });
         return View(res);
+    }
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        if (HttpContext.Session.GetInt32("IdUsuario") == null)
+        {
+            context.Result = RedirectToAction("Login", "login");
+        }
     }
 }

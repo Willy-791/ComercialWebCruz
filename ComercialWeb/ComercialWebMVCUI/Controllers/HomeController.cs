@@ -1,5 +1,6 @@
 using ComercialWebMVCUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics;
 
 namespace ComercialWebMVCUI.Controllers
@@ -20,6 +21,13 @@ namespace ComercialWebMVCUI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (HttpContext.Session.GetInt32("IdUsuario") == null)
+            {
+                context.Result = RedirectToAction("Login", "login");
+            }
         }
     }
 }

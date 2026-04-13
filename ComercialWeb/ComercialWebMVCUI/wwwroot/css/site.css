@@ -12725,26 +12725,26 @@ body {
 
     /* Color normal del texto */
     .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-        color: #D1D5DB;
+        color: #ffffff;
         transition: all 0.3s ease;
     }
 
         /* Color normal de iconos */
         .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon i {
-            color: #9CA3AF;
+            color: #ffffff;
             transition: color 0.3s ease;
         }
 
         /* Hover general */
         .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
             background-color: #C9A227;
-            color: #1F2937;
+            color: #000;
             transform: translateX(5px);
         }
 
             /* Hover iconos */
             .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover .sb-nav-link-icon i {
-                color: #1F2937;
+                color: #000;
             }
 
         /* Link activo */

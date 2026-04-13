@@ -80,28 +80,22 @@ namespace ComercialWebMVCUI.Controllers
             return View(marca);
         }
 
-        /* POST: MarcaController/Edit/5
-       // [HttpPost]
+        // POST: MarcaController/Edit/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MarcaEN pMarca)
         {
             try
             {
-                if(!Request.Form.ContainsKey("Estado"))
-                    {
-                    pMarca.Estado = 0;
-                }
                 await marcaBL.ModificarAsync(pMarca);
                 return RedirectToAction(nameof(Index));
-     
-                
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View(pMarca);
             }
-        }*/
+        }
 
         // GET: MarcaController/Delete/5
         public async Task<IActionResult> Delete(int IdMarca)
