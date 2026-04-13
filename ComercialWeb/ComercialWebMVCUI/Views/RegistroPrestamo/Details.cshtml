@@ -1,0 +1,35 @@
+﻿@model ComercialWebEN.RegistroPrestamoEN
+
+<h1>Detalles de Préstamo</h1>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-4">Cliente</dt>
+    <dd class="col-sm-8">@Model.Cliente?.Nombre</dd>
+
+    <dt class="col-sm-4">Producto</dt>
+    <dd class="col-sm-8">@Model.Producto?.Nombre</dd>
+
+    <dt class="col-sm-4">Cantidad</dt>
+    <dd class="col-sm-8">@Model.Cantidad</dd>
+
+    <dt class="col-sm-4">Estado</dt>
+    <dd class="col-sm-8">@Model.EstadoPrestamo?.Nombre</dd>
+
+    <dt class="col-sm-4">Fecha Inicio</dt>
+    <dd class="col-sm-8">@Model.FechaInicio</dd>
+
+    <dt class="col-sm-4">Fecha Fin</dt>
+    <dd class="col-sm-8">@Model.FechaFin</dd>
+
+    <dt class="col-sm-4">Detalle</dt>
+    <dd class="col-sm-8">@Model.Detalle</dd>
+
+</dl>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdRegistroPrestamo">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

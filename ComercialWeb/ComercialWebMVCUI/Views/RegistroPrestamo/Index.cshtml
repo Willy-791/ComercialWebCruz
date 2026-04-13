@@ -1,0 +1,118 @@
+﻿@model IEnumerable<ComercialWebEN.RegistroPrestamoEN>
+
+@{
+    ViewData["Title"] = "Index";
+
+    int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
+    int topActual = ViewBag.Top != null ? (int)ViewBag.Top : 10;
+
+    List<ComercialWebEN.ClienteEN> clientes =
+        ViewBag.Clientes as List<ComercialWebEN.ClienteEN> ?? new List<ComercialWebEN.ClienteEN>();
+
+    List<ComercialWebEN.ProductoEN> productos =
+        ViewBag.Productos as List<ComercialWebEN.ProductoEN> ?? new List<ComercialWebEN.ProductoEN>();
+
+    List<ComercialWebEN.EstadoPrestamoEN> estados =
+        ViewBag.Estados as List<ComercialWebEN.EstadoPrestamoEN> ?? new List<ComercialWebEN.EstadoPrestamoEN>();
+}
+
+<h1>Buscar Préstamos</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index" method="get">
+            <div class="row">
+
+                <div class="col-4">
+                    <label>Cliente</label>
+                    <select name="IdCliente" class="form-control">
+                        <option value="0">Seleccionar Cliente</option>
+                        @foreach (var item in clientes)
+                        {
+                            <option value="@item.IdCliente">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-4">
+                    <label>Producto</label>
+                    <select name="IdProducto" class="form-control">
+                        <option value="0">Seleccionar Producto</option>
+                        @foreach (var item in productos)
+                        {
+                            <option value="@item.IdProducto">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-4">
+                    <label>Estado</label>
+                    <select name="IdEstadoPrestamo" class="form-control">
+                        <option value="0">Seleccionar Estado</option>
+                        @foreach (var item in estados)
+                        {
+                            <option value="@item.IdEstadoPrestamo">@item.Nombre</option>
+                        }
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-3">
+                    <label>Top</label>
+                    <select name="Top_Aux" class="form-control">
+                        @foreach (var item in tops)
+                        {
+                            string txt = item != -1 ? item.ToString() : "Todos";
+                            <option value="@item" selected="@(item == topActual)">
+                                @txt
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Buscar" class="btn btn-primary" />
+                    <a asp-action="Create" class="btn btn-dark">Nuevo</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model ?? new List<ComercialWebEN.RegistroPrestamoEN>())
+        {
+            <tr>
+                <td>@item.Cliente?.Nombre</td>
+                <td>@item.Producto?.Nombre</td>
+                <td>@item.Cantidad</td>
+                <td>@item.EstadoPrestamo?.Nombre</td>
+                <td>@item.FechaInicio</td>
+                <td>@item.FechaFin</td>
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Ver", "Details", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRegistroPrestamo }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

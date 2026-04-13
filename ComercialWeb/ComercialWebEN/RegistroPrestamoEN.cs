@@ -1,43 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace ComercialWebEN
 {
-    public class RegistroPrestamo
+    public class RegistroPrestamoEN
     {
         [Key]
-        [Required]
         public int IdRegistroPrestamo { get; set; }
 
         [Required(ErrorMessage = "El cliente es obligatorio.")]
         [ForeignKey("Cliente")]
-        [Display(Name = "Cliente")]
         public int IdCliente { get; set; }
 
-        [ForeignKey("Producto")]
         [Required(ErrorMessage = "El producto es obligatorio.")]
-        [Display(Name = "Producto")]
+        [ForeignKey("Producto")]
         public int IdProducto { get; set; }
 
-        [ForeignKey("Estado Prestamo")]
         [Required(ErrorMessage = "El estado Prestamo es obligatorio.")]
-        [Display(Name = "Estado Prestamo")]
+        [ForeignKey("EstadoPrestamo")]
         public int IdEstadoPrestamo { get; set; }
 
-        
-        [Display(Name = "Fecha registro")]
-        public DateTime FechaInicio { get; set; }
+        [Required(ErrorMessage = "La cantidad es obligatoria")]
+        [Range(1, 1000)]
+        public int Cantidad { get; set; }
 
-        [Display(Name = "Fecha Fin")]
+        public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
-        [StringLength(250, ErrorMessage = "Maximo 250 caracteres")]
+        [StringLength(250)]
         public string? Detalle { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }
+
+        // 🔥 NAVEGACIÓN (IMPORTANTE)
+        public ClienteEN? Cliente { get; set; }
+        public ProductoEN? Producto { get; set; }
+        public EstadoPrestamoEN? EstadoPrestamo { get; set; }
     }
 }

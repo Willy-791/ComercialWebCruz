@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ComercialWebEN
 {
-    public class EstadoPrestamo
+    public class EstadoPrestamoEN
     {
         [Key]
         [Required]

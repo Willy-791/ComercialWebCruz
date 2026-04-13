@@ -9,7 +9,7 @@ namespace ComercialWebDAL
 {
     public class EstadoPrestamoDAL
     {
-        public static async Task<int> GuardarAsync(EstadoPrestamo pEstado)
+        public static async Task<int> GuardarAsync(EstadoPrestamoEN pEstado)
         {
             int result = 0;
             using (var dbContexto = new DBContexto())
@@ -20,7 +20,7 @@ namespace ComercialWebDAL
             return result;
         }
 
-        public static async Task<int> ModificarAsync(EstadoPrestamo pEstado)
+        public static async Task<int> ModificarAsync(EstadoPrestamoEN pEstado)
         {
             int result = 0;
             using (var dbContexto = new DBContexto())
@@ -36,7 +36,7 @@ namespace ComercialWebDAL
             return result;
         }
 
-        public static async Task<int> EliminarAsync(EstadoPrestamo pEstado)
+        public static async Task<int> EliminarAsync(EstadoPrestamoEN pEstado)
         {
             int result = 0;
             using (var dbContexto = new DBContexto())
@@ -50,9 +50,9 @@ namespace ComercialWebDAL
             return result;
         }
 
-        public static async Task<EstadoPrestamo> ObtenerPorIdAsync(EstadoPrestamo pEstado)
+        public static async Task<EstadoPrestamoEN> ObtenerPorIdAsync(EstadoPrestamoEN pEstado)
         {
-            EstadoPrestamo Estado = new EstadoPrestamo();
+            EstadoPrestamoEN Estado = new EstadoPrestamoEN();
             using (var dbContexto = new DBContexto())
             {
                 Estado = await dbContexto.EstadoPrestamo
@@ -61,9 +61,9 @@ namespace ComercialWebDAL
             return Estado;
         }
 
-        public static async Task<List<EstadoPrestamo>> ObtenerTodosAsync()
+        public static async Task<List<EstadoPrestamoEN>> ObtenerTodosAsync()
         {
-            List<EstadoPrestamo> Estados = new List<EstadoPrestamo>();
+            List<EstadoPrestamoEN> Estados = new List<EstadoPrestamoEN>();
             using (var dbContexto = new DBContexto())
             {
                 Estados = await dbContexto.EstadoPrestamo.ToListAsync();
@@ -71,7 +71,7 @@ namespace ComercialWebDAL
             return Estados;
         }
 
-        internal static IQueryable<EstadoPrestamo> QuerySelect(IQueryable<EstadoPrestamo> pQuery, EstadoPrestamo pEstado)
+        internal static IQueryable<EstadoPrestamoEN> QuerySelect(IQueryable<EstadoPrestamoEN> pQuery, EstadoPrestamoEN pEstado)
         {
             if (pEstado.IdEstadoPrestamo > 0)
                 pQuery = pQuery.Where(s => s.IdEstadoPrestamo == pEstado.IdEstadoPrestamo);
@@ -87,9 +87,9 @@ namespace ComercialWebDAL
             return pQuery;
         }
 
-        public static async Task<List<EstadoPrestamo>> BuscarAsync(EstadoPrestamo pEstado)
+        public static async Task<List<EstadoPrestamoEN>> BuscarAsync(EstadoPrestamoEN pEstado)
         {
-            var Estados = new List<EstadoPrestamo>();
+            var Estados = new List<EstadoPrestamoEN>();
             using (var dbContexto = new DBContexto())
             {
                 var select = dbContexto.EstadoPrestamo.AsQueryable();

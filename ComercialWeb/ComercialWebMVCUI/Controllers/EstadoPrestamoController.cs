@@ -12,10 +12,10 @@ namespace ComercialWebMVCUI.Controllers
         EstadoPrestamoBL estadoPrestamoBL = new EstadoPrestamoBL();
 
         // GET: EstadoPrestamoController
-        public async Task<IActionResult> Index(EstadoPrestamo pEstadoPrestamo = null)
+        public async Task<IActionResult> Index(EstadoPrestamoEN pEstadoPrestamo = null)
         {
             if (pEstadoPrestamo == null)
-                pEstadoPrestamo = new EstadoPrestamo();
+                pEstadoPrestamo = new EstadoPrestamoEN();
 
             if (pEstadoPrestamo.Top_Aux == 0)
                 pEstadoPrestamo.Top_Aux = 10;
@@ -35,7 +35,7 @@ namespace ComercialWebMVCUI.Controllers
                 return RedirectToAction(nameof(Index));
 
             var estado = await estadoPrestamoBL.ObtenerPorIdAsync(
-                new EstadoPrestamo { IdEstadoPrestamo = IdEstadoPrestamo });
+                new EstadoPrestamoEN { IdEstadoPrestamo = IdEstadoPrestamo });
 
             if (estado == null)
                 return RedirectToAction(nameof(Index));
@@ -53,7 +53,7 @@ namespace ComercialWebMVCUI.Controllers
         // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(EstadoPrestamo pEstadoPrestamo)
+        public async Task<IActionResult> Create(EstadoPrestamoEN pEstadoPrestamo)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace ComercialWebMVCUI.Controllers
                 return RedirectToAction(nameof(Index));
 
             var estado = await estadoPrestamoBL.ObtenerPorIdAsync(
-                new EstadoPrestamo { IdEstadoPrestamo = IdEstadoPrestamo });
+                new EstadoPrestamoEN { IdEstadoPrestamo = IdEstadoPrestamo });
 
             if (estado == null)
                 return RedirectToAction(nameof(Index));
@@ -85,7 +85,7 @@ namespace ComercialWebMVCUI.Controllers
         // POST: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EstadoPrestamo pEstadoPrestamo)
+        public async Task<IActionResult> Edit(EstadoPrestamoEN pEstadoPrestamo)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace ComercialWebMVCUI.Controllers
         public async Task<IActionResult> Delete(int IdEstadoPrestamo)
         {
             var estado = await estadoPrestamoBL.ObtenerPorIdAsync(
-                new EstadoPrestamo { IdEstadoPrestamo = IdEstadoPrestamo });
+                new EstadoPrestamoEN { IdEstadoPrestamo = IdEstadoPrestamo });
 
             return View(estado);
         }
@@ -111,7 +111,7 @@ namespace ComercialWebMVCUI.Controllers
         // POST: Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(EstadoPrestamo pEstadoPrestamo)
+        public async Task<IActionResult> Delete(EstadoPrestamoEN pEstadoPrestamo)
         {
             try
             {
