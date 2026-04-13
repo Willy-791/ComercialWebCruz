@@ -155,5 +155,24 @@ namespace ComercialWebMVCUI.Controllers
                 context.Result = RedirectToAction("Login", "login");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CambiarEstado([FromBody] ClienteEN cliente)
+        {
+            if (cliente == null || cliente.IdCliente == 0)
+                return Json(new { ok = false });
+
+            var cli = await clienteBL.ObtenerPorIdAsync(
+                new ClienteEN { IdCliente = cliente.IdCliente });
+
+            if (cli == null)
+                return Json(new { ok = false });
+
+            cli.Estado = cliente.Estado;
+
+            await clienteBL.ModificarAsync(cli);
+
+            return Json(new { ok = true });
+        }
     }
 }

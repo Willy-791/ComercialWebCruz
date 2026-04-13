@@ -4,71 +4,71 @@
     ViewData["Title"] = "Eliminar Cliente";
 }
 
-<h4>Desactivar Cliente</h4>
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<h5>¿Estás seguro que deseas desactivar este cliente?</h5>
+<div class="delete-container">
 
-<div>
-    <dl class="row">
+    <h4 class="title">
+        <i class="fa fa-triangle-exclamation"></i> Desactivar Cliente
+    </h4>
 
-        <dt class="col-sm-3">
-            Rol
-        </dt>
-        <dd class="col-sm-9">
-            @Model.Rol?.Nombre
-        </dd>
+    <div class="warning">
+        ⚠️ ¿Estás seguro que deseas desactivar este cliente?
+    </div>
 
-        <dt class="col-sm-3">
-            Residencia
-        </dt>
-        <dd class="col-sm-9">
-            @Model.Residencia?.Nombre
-        </dd>
+    <div class="detail-item">
+        <span class="label">Rol</span>
+        <span class="value">@Model.Rol?.Nombre</span>
+    </div>
 
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
+    <div class="detail-item">
+        <span class="label">Residencia</span>
+        <span class="value">@Model.Residencia?.Nombre</span>
+    </div>
 
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
+    <div class="detail-item">
+        <span class="label">Nombre</span>
+        <span class="value">@Model.Nombre</span>
+    </div>
 
-        <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Celular)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Celular)
-        </dd>
+    <div class="detail-item">
+        <span class="label">Apellido</span>
+        <span class="value">@Model.Apellido</span>
+    </div>
 
-        <dt class="col-sm-3">
-            Estado
-        </dt>
-        <dd class="col-sm-9">
+    <div class="detail-item">
+        <span class="label">Celular</span>
+        <span class="value">@Model.Celular</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Estado</span>
+        <span class="value">
             @if (Model.Estado)
             {
-                <span class="badge bg-success">ACTIVO</span>
+                <span class="estado activo">ACTIVO</span>
             }
             else
             {
-                <span class="badge bg-danger">INACTIVO</span>
+                <span class="estado inactivo">INACTIVO</span>
             }
-        </dd>
-
-    </dl>
-</div>
-
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="IdCliente" />
-
-    <div class="form-group mt-3">
-        <input type="submit" value="Desactivar" class="btn btn-danger" />
-        <a asp-action="Index" class="btn btn-dark">Cancelar</a>
+        </span>
     </div>
-</form>
+
+    <form asp-action="Delete" method="post">
+
+        <input type="hidden" asp-for="IdCliente" />
+
+        <div class="mt-4">
+            <input type="submit" value="Desactivar"
+                   class="btn btn-danger-custom btn-custom" />
+
+            <a asp-action="Index"
+                   class="btn btn-cancel btn-custom">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+
+</div>

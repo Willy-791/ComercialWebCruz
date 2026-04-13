@@ -1,153 +1,147 @@
 ﻿@model IEnumerable<ComercialWebEN.ClienteEN>
 
 @{
-    ViewData["Title"] = "Index";
-    int numPage = 0;
-    int numRegistros = 0;
-    int numRegistrosPorPage = 10;
+    ViewData["Title"] = "Clientes";
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = (int)ViewBag.Top;
-    List<ComercialWebEN.ResidenciaEN> residencias = ViewBag.Residencias as List<ComercialWebEN.ResidenciaEN>;
 }
 
-<h1>Buscar Cliente</h1>
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Index">
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="Nombre" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Apellido</label>
-                        <input type="text" class="form-control" name="Apellido" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Celular</label>
-                        <input type="text" class="form-control" name="Celular" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="control-label">Residencia</label>
-                        <select name="idresidencia" class="form-control">
-                            <option value="0">Seleccionar Residencia</option>
-                            @foreach (var item in residencias)
-                            {
-                                <option value="@item.IdResidencia">@item.Nombre</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Estado</label>
-                        <select name="Estado_Aux" class="form-control">
-                            <option value="0">Todos</option>
-                            <option value="1">Activos</option>
-                            <option value="2">Inactivos</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label class="control-label">Top</label>
-                        <select name="top_aux" class="form-control">
-                            @foreach (var item in tops)
-                            {
-                                string strItem = item != -1 ? item.ToString() : "Todos";
-                                if (item != topActual)
-                                {
-                                    <option value="@item">@strItem</option>
-                                }
-                                else
-                                {
-                                    <option selected value="@item">@strItem</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input type="submit" value="Buscar" class="btn btn-primary" />
-                        <a asp-action="Create" class="btn btn-dark">Nuevo</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdResidencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Celular)
-            </th>
-            <th>
-                Rol
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Residencia.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Apellido)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Celular)
-                </td>
-                <td>
-                    @item.Rol?.Nombre
-                </td>
-                <td>
-                    @if (item.Estado)
+<div class="container-custom">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h4><i class="fa-solid fa-users"></i> Clientes</h4>
+
+        <form asp-action="Index" class="d-flex">
+
+            <div class="search-box">
+                <input type="text" name="Nombre" placeholder="Buscar cliente..." />
+                <button type="submit" class="btn-search-icon">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <select name="Top_Aux" class="top-select">
+                @foreach (var item in tops)
+                {
+                    string txt = item != -1 ? item.ToString() : "Todos";
+
+                    if (item == topActual)
                     {
-                        <span class="badge bg-success">Activo</span>
+                        <option value="@item" selected>@txt</option>
                     }
                     else
                     {
-                        <span class="badge bg-danger">Inactivo</span>
+                        <option value="@item">@txt</option>
                     }
-                </td>
-                <td>
-                    @Html.ActionLink("Modificar", "Edit", new { IdCliente = item.IdCliente }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Ver", "Details", new { IdCliente = item.IdCliente }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { IdCliente = item.IdCliente }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                }
+            </select>
+
+        </form>
+    </div>
+
+    <!-- CARD -->
+    <div class="card-box">
+        <div class="card-title">TOTAL CLIENTES</div>
+        <div class="card-value">@Model.Count()</div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="table-box">
+
+        <div class="d-flex justify-content-between mb-3">
+            <h6><b>Lista de Clientes</b></h6>
+            <a asp-action="Create" class="btn btn-new">
+                <i class="fa fa-plus"></i> Agregar
+            </a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellido</td>
+                        <td>@item.Celular</td>
+
+                        <td>
+                            <span id="estado-text-@item.IdCliente"
+                                  class="estado @(item.Estado ? "activo" : "inactivo")">
+                                @(item.Estado ? "Activo" : "Inactivo")
+                            </span>
+
+                            <label class="switch">
+                                <input type="checkbox"
+                                       @(item.Estado ? "checked" : "")
+                                       onchange="cambiarEstado(@item.IdCliente, this)" />
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+
+                        <td class="acciones">
+                            <a asp-action="Edit" asp-route-IdCliente="@item.IdCliente">
+                                <i class="fa fa-pen"></i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-IdCliente="@item.IdCliente">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-IdCliente="@item.IdCliente">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    function cambiarEstado(id, checkbox) {
+        let estado = checkbox.checked;
+
+        fetch('/Cliente/CambiarEstado', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                IdCliente: id,
+                Estado: estado
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            if (!data.ok) return;
+
+            let span = document.getElementById("estado-text-" + id);
+
+            if (estado) {
+                span.innerText = "Activo";
+                span.className = "estado activo";
+            } else {
+                span.innerText = "Inactivo";
+                span.className = "estado inactivo";
+            }
+
+        });
+    }
+</script>

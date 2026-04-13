@@ -6,43 +6,46 @@
     List<ComercialWebEN.ResidenciaEN> residencias = ViewBag.Residencias as List<ComercialWebEN.ResidenciaEN>;
 }
 
-<h1>Crear Cliente</h1>
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<form asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-container">
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
+    <h4 class="form-title">
+        <i class="fa fa-user-plus"></i> Crear Cliente
+    </h4>
+
+    <span class="text-danger">@ViewBag.Error</span>
+
+    <form asp-action="Create">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>Nombre</label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
+            <div class="col-md-4">
+                <label>Apellido</label>
                 <input asp-for="Apellido" class="form-control" />
                 <span asp-validation-for="Apellido" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Celular" class="control-label"></label>
+            <div class="col-md-4">
+                <label>Celular</label>
                 <input asp-for="Celular" class="form-control" />
                 <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
         </div>
-    </div>
 
-    <div class="row">
+        <br />
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdResidencia" class="control-label"></label>
+        <div class="row">
+
+            <div class="col-md-4">
+                <label>Residencia</label>
                 <select asp-for="IdResidencia" class="form-control">
                     <option value="">Seleccionar</option>
                     @foreach (var item in residencias)
@@ -52,11 +55,9 @@
                 </select>
                 <span asp-validation-for="IdResidencia" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
+            <div class="col-md-4">
+                <label>Rol</label>
                 <select asp-for="IdRol" class="form-control">
                     <option value="">Seleccionar</option>
                     @foreach (var item in roles)
@@ -66,30 +67,28 @@
                 </select>
                 <span asp-validation-for="IdRol" class="text-danger"></span>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
+            <div class="col-md-4">
+                <label>Estado</label>
                 <select asp-for="Estado" class="form-control">
                     <option value="true" selected>ACTIVO</option>
                     <option value="false">INACTIVO</option>
                 </select>
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
+
         </div>
 
-    </div>
+        <br />
 
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-dark">Regresar</a>
-            </div>
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-save btn-custom" />
+            <a asp-action="Index" class="btn btn-back btn-custom">Regresar</a>
         </div>
-    </div>
-</form>
+
+    </form>
+
+</div>
 
 @section Scripts {
     @{

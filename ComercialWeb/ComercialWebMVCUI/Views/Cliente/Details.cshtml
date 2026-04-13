@@ -4,71 +4,62 @@
     ViewData["Title"] = "Detalle Cliente";
 }
 
-<h1>Detalle del Cliente</h1>
-<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<div class="row">
-    <div class="col-md-6">
+<div class="detail-container">
 
-        <dl class="row">
+    <h4 class="title">
+        <i class="fa fa-user"></i> Detalle del Cliente
+    </h4>
 
-            <dt class="col-sm-4">
-                Rol
-            </dt>
-            <dd class="col-sm-8">
-                @Model.Rol?.Nombre
-            </dd>
-
-            <dt class="col-sm-4">
-                Residencia
-            </dt>
-            <dd class="col-sm-8">
-                @Model.Residencia?.Nombre
-            </dd>
-
-            <dt class="col-sm-4">
-                Nombre
-            </dt>
-            <dd class="col-sm-8">
-                @Model.Nombre
-            </dd>
-
-            <dt class="col-sm-4">
-                Apellido
-            </dt>
-            <dd class="col-sm-8">
-                @Model.Apellido
-            </dd>
-
-            <dt class="col-sm-4">
-                Celular
-            </dt>
-            <dd class="col-sm-8">
-                @Model.Celular
-            </dd>
-
-            <dt class="col-sm-4">
-                Estado
-            </dt>
-            <dd class="col-sm-8">
-                @if (Model.Estado)
-                {
-                    <span class="badge bg-success">ACTIVO</span>
-                }
-                else
-                {
-                    <span class="badge bg-danger">INACTIVO</span>
-                }
-            </dd>
-
-        </dl>
-
-        <div class="mt-3">
-            <a asp-action="Edit" asp-route-IdCliente="@Model.IdCliente"
-               class="btn btn-primary">Editar</a>
-
-            <a asp-action="Index" class="btn btn-dark">Regresar</a>
-        </div>
-
+    <div class="detail-item">
+        <span class="label">Rol</span>
+        <span class="value">@Model.Rol?.Nombre</span>
     </div>
+
+    <div class="detail-item">
+        <span class="label">Residencia</span>
+        <span class="value">@Model.Residencia?.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Nombre</span>
+        <span class="value">@Model.Nombre</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Apellido</span>
+        <span class="value">@Model.Apellido</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Celular</span>
+        <span class="value">@Model.Celular</span>
+    </div>
+
+    <div class="detail-item">
+        <span class="label">Estado</span>
+        <span class="value">
+            @if (Model.Estado)
+            {
+                <span class="estado activo">ACTIVO</span>
+            }
+            else
+            {
+                <span class="estado inactivo">INACTIVO</span>
+            }
+        </span>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-IdCliente="@Model.IdCliente"
+               class="btn btn-edit btn-custom">
+            <i class="fa fa-pen"></i> Editar
+        </a>
+
+        <a asp-action="Index" class="btn btn-back btn-custom">
+            Regresar
+        </a>
+    </div>
+
 </div>

@@ -1,0 +1,323 @@
+﻿/* =========================
+   BASE
+========================= */
+body {
+    background: #f4f6f9;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container-custom {
+    padding: 20px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .header h4 {
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+/* =========================
+   BUSCADOR
+========================= */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #e9edf2;
+    border-radius: 30px;
+    padding: 5px 15px;
+    width: 280px;
+}
+
+    .search-box input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 100%;
+        padding: 6px;
+    }
+
+.btn-search-icon {
+    border: none;
+    background: none;
+    color: #2c3e50;
+}
+
+.top-select {
+    margin-left: 10px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: none;
+    background: #e9edf2;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card-box {
+    background: #f1f3f5;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.card-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* =========================
+   TABLA
+========================= */
+.table-box {
+    background: #f1f3f5;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #dcdcdc;
+    color: #2c3e50;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:hover {
+    background: #e9ecef;
+}
+
+/* =========================
+   BOTONES
+========================= */
+.btn-custom {
+    border-radius: 8px;
+    padding: 8px 15px;
+}
+
+.btn-new {
+    background: #c79a3b;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 15px;
+}
+
+    .btn-new:hover {
+        background: #b6892f;
+        color: white;
+    }
+
+.btn-save {
+    background: #28a745;
+    color: white;
+}
+
+    .btn-save:hover {
+        background: #218838;
+    }
+
+.btn-back {
+    background: #343a40;
+    color: white;
+}
+
+    .btn-back:hover {
+        background: #23272b;
+    }
+
+.btn-edit {
+    background: #007bff;
+    color: white;
+}
+
+.btn-danger-custom {
+    background: #dc3545;
+    color: white;
+}
+
+    .btn-danger-custom:hover {
+        background: #c82333;
+    }
+
+/* =========================
+   ICONOS ACCIONES
+========================= */
+.acciones a {
+    margin-right: 12px;
+    color: #6c757d;
+    transition: 0.2s;
+}
+
+    .acciones a:hover {
+        color: #000;
+    }
+
+/* =========================
+   ESTADOS
+========================= */
+.estado {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.activo {
+    background: #d4edda;
+    color: #155724;
+}
+
+.inactivo {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* =========================
+   SWITCH
+========================= */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-left: 8px;
+}
+
+    .switch input {
+        display: none;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s;
+}
+
+    .slider:before {
+        content: "";
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        border-radius: 50%;
+        transition: .3s;
+    }
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+
+    input:checked + .slider:before {
+        transform: translateX(18px);
+    }
+
+/* =========================
+   FORMULARIOS
+========================= */
+.form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #f1f3f5;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.form-title {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: none;
+    padding: 10px;
+}
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #dcdcdc;
+    }
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+/* =========================
+   DETALLE / DELETE
+========================= */
+.detail-container,
+.delete-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #f1f3f5;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.title {
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.delete-container .title {
+    color: #c82333;
+}
+
+.warning {
+    background: #fff3cd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: #856404;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+}
+
+.value {
+    color: #2c3e50;
+}
